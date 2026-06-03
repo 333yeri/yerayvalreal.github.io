@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yeray Val Real — Online Backend Specialist</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1a1a1a; line-height: 1.6; background: #fafafa; }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+        header { padding: 60px 0 40px; text-align: center; }
+        header h1 { font-size: 2.2rem; font-weight: 700; margin-bottom: 12px; letter-spacing: -0.5px; }
+        header p { font-size: 1.1rem; color: #666; max-width: 560px; margin: 0 auto; }
+        .services { padding: 40px 0; }
+        .services h2 { text-align: center; font-size: 1.5rem; margin-bottom: 32px; }
+        .service-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .service-card { background: #fff; border: 1px solid #e5e5e5; border-radius: 12px; padding: 28px; }
+        .service-card h3 { font-size: 1.1rem; margin-bottom: 8px; }
+        .service-card p { font-size: 0.9rem; color: #666; }
+        .service-card .price { font-size: 1.4rem; font-weight: 700; color: #1a1a1a; margin-top: 16px; }
+        .service-card .price span { font-size: 0.85rem; font-weight: 400; color: #888; }
+        .how { padding: 40px 0; background: #fff; border-radius: 16px; margin: 40px 0; }
+        .how h2 { text-align: center; font-size: 1.5rem; margin-bottom: 32px; }
+        .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .step { text-align: center; }
+        .step .num { width: 40px; height: 40px; background: #1a1a1a; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; font-weight: 700; }
+        .step h4 { font-size: 0.95rem; margin-bottom: 4px; }
+        .step p { font-size: 0.85rem; color: #666; }
+        .testimonial { padding: 40px 0; }
+        .testimonial h2 { text-align: center; font-size: 1.5rem; margin-bottom: 32px; }
+        .testimonial-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+        .testimonial-card { background: #fff; border: 1px solid #e5e5e5; border-radius: 12px; padding: 28px; }
+        .testimonial-card .stars { color: #f5a623; font-size: 1.1rem; margin-bottom: 12px; letter-spacing: 2px; }
+        .testimonial-card .quote { font-size: 0.95rem; color: #333; margin-bottom: 16px; line-height: 1.5; }
+        .testimonial-card .author { font-weight: 600; font-size: 0.9rem; }
+        .testimonial-card .role { font-size: 0.8rem; color: #888; }
+        .about { padding: 40px 0; }
+        .about-inner { display: flex; align-items: center; gap: 28px; background: #fff; border: 1px solid #e5e5e5; border-radius: 12px; padding: 32px; }
+        .about-photo { width: 90px; height: 90px; border-radius: 50%; background: #e5e5e5; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: #999; font-size: 0.75rem; text-align: center; overflow: hidden; }
+        .about-photo img { width: 100%; height: 100%; object-fit: cover; }
+        .about-text h3 { font-size: 1.1rem; margin-bottom: 8px; }
+        .about-text p { font-size: 0.9rem; color: #666; line-height: 1.6; }
+        .cta { padding: 60px 0; text-align: center; }
+        .cta h2 { font-size: 1.5rem; margin-bottom: 12px; }
+        .cta p { color: #666; margin-bottom: 24px; }
+        .cta a { display: inline-block; background: #1a1a1a; color: #fff; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 1rem; }
+        .cta a:hover { background: #333; }
+        footer { padding: 40px 0; text-align: center; color: #888; font-size: 0.85rem; border-top: 1px solid #e5e5e5; margin-top: 40px; }
+        @media (max-width: 600px) {
+            .service-grid { grid-template-columns: 1fr; }
+            .steps { grid-template-columns: 1fr; }
+            .testimonial-grid { grid-template-columns: 1fr; }
+            .about-inner { flex-direction: column; text-align: center; }
+            header h1 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Yeray Val Real</h1>
+            <p>You're great at what you do. The online stuff? That's my thing. I automate the boring parts of running a business — so you can focus on the work you actually love.</p>
+        </header>
+        <section class="services">
+            <h2>What I Handle For You</h2>
+            <div class="service-grid">
+                <div class="service-card">
+                    <h3>Online Booking System</h3>
+                    <p>Clients book themselves 24/7. Automated confirmations, reminders, calendar sync. No more phone tag, no more double-bookings, no more "sorry I missed your call."</p>
+                    <div class="price">£350 <span>one-time</span></div>
+                </div>
+                <div class="service-card">
+                    <h3>Payment Automation</h3>
+                    <p>Stripe setup with deposits, recurring payments, and automatic invoicing. Get paid before the appointment. Stop chasing people for money.</p>
+                    <div class="price">£200 <span>one-time</span></div>
+                </div>
+                <div class="service-card">
+                    <h3>Client Follow-Up AI</h3>
+                    <p>Automated WhatsApp & email sequences. Rebooking reminders, review requests, birthday messages. Your clients stay loyal without you lifting a finger.</p>
+                    <div class="price">£300 <span>one-time</span></div>
+                </div>
+                <div class="service-card">
+                    <h3>Full Business Setup</h3>
+                    <p>Website, booking, payments, follow-ups, admin automation. Everything connected and running on autopilot. Done in 5 days.</p>
+                    <div class="price">£750 <span>one-time</span></div>
+                </div>
+            </div>
+        </section>
+        <section class="how">
+            <h2>How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="num">1</div>
+                    <h4>You tell me what sucks</h4>
+                    <p>15-minute chat. I ask what's annoying you — booking chaos, chasing payments, clients ghosting, admin overload.</p>
+                </div>
+                <div class="step">
+                    <div class="num">2</div>
+                    <h4>I fix it</h4>
+                    <p>3-5 days. I build and connect your systems. Everything talks to each other. No more manual workarounds.</p>
+                </div>
+                <div class="step">
+                    <div class="num">3</div>
+                    <h4>You do your thing</h4>
+                    <p>Business runs itself. Clients book and pay. Reminders go out. You focus on the work — not the admin.</p>
+                </div>
+            </div>
+        </section>
+        <section class="about">
+            <div class="about-inner">
+                <div class="about-photo"><img src="yeray-photo.jpg" alt="Yeray Val Real"></div>
+                <div class="about-text">
+                    <h3>Hey, I'm Yeray</h3>
+                    <p>I'm an online backend specialist. I build the systems that make your business run smoothly — booking, payments, client communication, all the stuff that eats your time. I started doing this because I watched talented people burn out on admin instead of doing what they're good at. That's what I fix. You do your thing, I handle the backend.</p>
+                </div>
+            </div>
+        </section>
+        <section class="testimonial">
+            <h2>What My Clients Say</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="quote">"I was losing clients because people had to call me to book. After Yeray set up the automated system, I picked up 4 new clients in the first week. Paid for itself immediately."</p>
+                    <p class="author">— Sarah M.</p>
+                    <p class="role">Yoga Instructor, Portsmouth</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="quote">"I had no website — just a phone number on Instagram. Yeray built me a full site with booking, payments, and automated follow-ups in 4 days. Fully booked ever since."</p>
+                    <p class="author">— James T.</p>
+                    <p class="role">Massage Therapist, Bristol</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="quote">"I was using Calendly but clients kept no-showing. Yeray integrated Stripe deposits and automated reminders. No-shows dropped to zero. I stopped chasing payments."</p>
+                    <p class="author">— Priya K.</p>
+                    <p class="role">Pilates Coach, Manchester</p>
+                </div>
+            </div>
+        </section>
+        <section class="cta">
+            <h2>Stop doing admin. Start doing your work.</h2>
+            <p>Let's automate the boring parts of your business. 3-5 days. One-time cost. No monthly fees.</p>
+            <a href="mailto:yerayvalreal@gmail.com?subject=I%20want%20to%20automate%20my%20business">Get Started — Email Me</a>
+        </section>
+        <footer>
+            <p>Yeray Val Real — Online Backend Specialist</p>
+            <p>yerayvalreal@gmail.com</p>
+        </footer>
+    </div>
+</body>
+</html>
