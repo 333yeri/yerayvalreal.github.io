@@ -20,12 +20,25 @@
         .service-card .price { font-size: 1.4rem; font-weight: 700; color: #1a1a1a; margin-top: 16px; }
         .service-card .price span { font-size: 0.85rem; font-weight: 400; color: #888; }
         .how { padding: 40px 0; background: #fff; border-radius: 16px; margin: 40px 0; }
-        .how h2 { text-align: center; font-size: 1.5rem; margin-bottom: 32px; }
-        .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-        .step { text-align: center; }
-        .step .num { width: 40px; height: 40px; background: #1a1a1a; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; font-weight: 700; }
-        .step h4 { font-size: 0.95rem; margin-bottom: 4px; }
-        .step p { font-size: 0.85rem; color: #666; }
+        .how h2 { text-align: center; font-size: 1.5rem; margin-bottom: 8px; }
+        .how .subtitle { text-align: center; color: #666; font-size: 0.9rem; margin-bottom: 32px; }
+        .questionnaire { max-width: 600px; margin: 0 auto; }
+        .q-block { margin-bottom: 28px; }
+        .q-block label { display: block; font-weight: 600; font-size: 0.95rem; margin-bottom: 6px; }
+        .q-block .hint { font-size: 0.8rem; color: #888; margin-bottom: 8px; }
+        .q-block input[type="text"], .q-block input[type="email"], .q-block input[type="url"], .q-block textarea, .q-block select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 0.9rem; font-family: inherit; box-sizing: border-box; }
+        .q-block textarea { min-height: 80px; resize: vertical; }
+        .q-block input:focus, .q-block textarea:focus, .q-block select:focus { outline: none; border-color: #1a1a1a; }
+        .q-checkbox-group { display: flex; flex-wrap: wrap; gap: 10px; }
+        .q-checkbox-group label { display: flex; align-items: center; gap: 6px; font-weight: 400; font-size: 0.85rem; background: #f5f5f5; padding: 8px 14px; border-radius: 20px; cursor: pointer; }
+        .q-checkbox-group label:hover { background: #eee; }
+        .q-checkbox-group input[type="checkbox"] { accent-color: #1a1a1a; }
+        .q-radio-group { display: flex; flex-direction: column; gap: 8px; }
+        .q-radio-group label { display: flex; align-items: center; gap: 8px; font-weight: 400; font-size: 0.9rem; cursor: pointer; }
+        .q-radio-group input[type="radio"] { accent-color: #1a1a1a; }
+        .q-submit { text-align: center; margin-top: 36px; }
+        .q-submit button { background: #1a1a1a; color: #fff; padding: 14px 40px; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; }
+        .q-submit button:hover { background: #333; }
         .testimonial { padding: 40px 0; }
         .testimonial h2 { text-align: center; font-size: 1.5rem; margin-bottom: 32px; }
         .testimonial-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
@@ -87,24 +100,83 @@
             </div>
         </section>
         <section class="how">
-            <h2>How It Works</h2>
-            <div class="steps">
-                <div class="step">
-                    <div class="num">1</div>
-                    <h4>You tell me what sucks</h4>
-                    <p>15-minute chat. I ask what's annoying you — booking chaos, chasing payments, clients ghosting, admin overload.</p>
+            <h2>Tell Me What You Need</h2>
+            <p class="subtitle">Fill this out and I'll get back to you with a plan. No calls, no back-and-forth — just tell me what you need and I'll handle it.</p>
+            <form class="questionnaire" action="mailto:yerayvalreal@gmail.com" method="post" enctype="text/plain">
+                <div class="q-block">
+                    <label>Your name</label>
+                    <input type="text" name="name" placeholder="First name is fine" required>
                 </div>
-                <div class="step">
-                    <div class="num">2</div>
-                    <h4>I fix it</h4>
-                    <p>3-5 days. I build and connect your systems. Everything talks to each other. No more manual workarounds.</p>
+                <div class="q-block">
+                    <label>Email</label>
+                    <input type="email" name="email" placeholder="your@email.com" required>
                 </div>
-                <div class="step">
-                    <div class="num">3</div>
-                    <h4>You do your thing</h4>
-                    <p>Business runs itself. Clients book and pay. Reminders go out. You focus on the work — not the admin.</p>
+                <div class="q-block">
+                    <label>What do you do? (your business/service)</label>
+                    <input type="text" name="business" placeholder="e.g. yoga instructor, massage therapist, dog groomer, tutor..." required>
                 </div>
-            </div>
+                <div class="q-block">
+                    <label>Do you have a website?</label>
+                    <div class="q-radio-group">
+                        <label><input type="radio" name="website" value="yes" required> Yes — I have one</label>
+                        <label><input type="radio" name="website" value="no"> No — I need one</label>
+                        <label><input type="radio" name="website" value="social"> Just social media (Instagram, Facebook...)</label>
+                    </div>
+                </div>
+                <div class="q-block">
+                    <label>If you have a website, what's the URL?</label>
+                    <input type="url" name="website_url" placeholder="https://yoursite.com">
+                </div>
+                <div class="q-block">
+                    <label>How do clients currently book with you?</label>
+                    <div class="q-radio-group">
+                        <label><input type="radio" name="booking" value="phone" required> Phone calls / text messages</label>
+                        <label><input type="radio" name="booking" value="dm"> DMs on Instagram / social media</label>
+                        <label><input type="radio" name="booking" value="calendar"> Calendly / Cal.com / similar</label>
+                        <label><input type="radio" name="booking" value="platform"> Through a platform (Treatwell, Fresha, etc.)</label>
+                        <label><input type="radio" name="booking" value="nothing"> Nothing — I just tell them when</label>
+                    </div>
+                </div>
+                <div class="q-block">
+                    <label>How do clients currently pay you?</label>
+                    <div class="q-radio-group">
+                        <label><input type="radio" name="payment" value="cash" required> Cash in person</label>
+                        <label><input type="radio" name="payment" value="bank"> Bank transfer</label>
+                        <label><input type="radio" name="payment" value="stripe"> Stripe / Square / online</label>
+                        <label><input type="radio" name="payment" value="nothing"> They just pay whenever</label>
+                    </div>
+                </div>
+                <div class="q-block">
+                    <label>What do you need? (select all that apply)</label>
+                    <div class="q-checkbox-group">
+                        <label><input type="checkbox" name="needs" value="booking"> Online booking system</label>
+                        <label><input type="checkbox" name="needs" value="payments"> Payment / deposit setup</label>
+                        <label><input type="checkbox" name="needs" value="website"> New website</label>
+                        <label><input type="checkbox" name="needs" value="followup"> Automated client follow-ups</label>
+                        <label><input type="checkbox" name="needs" value="reminders"> Booking reminders (SMS/email)</label>
+                        <label><input type="checkbox" name="needs" value="reviews"> Automated review requests</label>
+                        <label><input type="checkbox" name="needs" value="calendar"> Calendar sync</label>
+                        <label><input type="checkbox" name="needs" value="admin"> General admin automation</label>
+                    </div>
+                </div>
+                <div class="q-block">
+                    <label>What does your ideal website look like?</label>
+                    <p class="hint">Describe the vibe, colors, style — or paste links to sites you like</p>
+                    <textarea name="website_style" placeholder="e.g. clean and minimal, warm and earthy, dark and modern... or paste URLs of sites you like"></textarea>
+                </div>
+                <div class="q-block">
+                    <label>What's annoying you most right now?</label>
+                    <p class="hint">The thing that wastes your time or makes you want to scream</p>
+                    <textarea name="pain_point" placeholder="e.g. clients keep no-showing, I spend 2 hours a day on admin, I lose bookings because people can't reach me..."></textarea>
+                </div>
+                <div class="q-block">
+                    <label>Anything else I should know?</label>
+                    <textarea name="extra" placeholder="Your working hours, how many clients you see per week, special requirements, whatever..."></textarea>
+                </div>
+                <div class="q-submit">
+                    <button type="submit">Send — I'll get back to you within 24h</button>
+                </div>
+            </form>
         </section>
         <section class="about">
             <div class="about-inner">
@@ -140,8 +212,8 @@
         </section>
         <section class="cta">
             <h2>Stop doing admin. Start doing your work.</h2>
-            <p>Let's automate the boring parts of your business. 3-5 days. One-time cost. No monthly fees.</p>
-            <a href="mailto:yerayvalreal@gmail.com?subject=I%20want%20to%20automate%20my%20business">Get Started — Email Me</a>
+            <p>Fill out the form above and I'll get back to you within 24 hours. No calls. No pressure. Just tell me what you need.</p>
+            <a href="#Tell Me What You Need">Fill Out the Form</a>
         </section>
         <footer>
             <p>Yeray Val Real — Online Backend Specialist</p>
