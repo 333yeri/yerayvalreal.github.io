@@ -21,12 +21,6 @@
         .service-card p { font-size: 0.9rem; color: #666; }
         .service-card .price { font-size: 1.4rem; font-weight: 700; color: #1a1a1a; margin-top: 16px; }
         .service-card .price span { font-size: 0.85rem; font-weight: 400; color: #888; }
-        .service-card .price-local { font-size: 0.8rem; color: #888; margin-top: 4px; }
-
-        /* Currency converter */
-        .currency-bar { text-align: center; padding: 16px 0; margin-bottom: 20px; }
-        .currency-bar label { font-size: 0.85rem; color: #666; margin-right: 8px; }
-        .currency-bar select { padding: 8px 14px; border: 1px solid #ddd; border-radius: 8px; font-size: 0.9rem; background: #fff; cursor: pointer; }
 
         /* How it works */
         .how { padding: 40px 0; background: #fff; border-radius: 16px; margin: 40px 0; }
@@ -109,33 +103,6 @@
             <p>You're great at what you do. The online stuff? That's my thing. I automate the boring parts of running a business — so you can focus on the work you actually love.</p>
         </header>
 
-        <!-- Currency Converter -->
-        <div class="currency-bar">
-            <label for="currency-select">Show prices in:</label>
-            <select id="currency-select">
-                <option value="GBP" selected>£ GBP (British Pound)</option>
-                <option value="USD">$ USD (US Dollar)</option>
-                <option value="EUR">€ EUR (Euro)</option>
-                <option value="AUD">$ AUD (Australian Dollar)</option>
-                <option value="CAD">$ CAD (Canadian Dollar)</option>
-                <option value="NZD">$ NZD (New Zealand Dollar)</option>
-                <option value="INR">₹ INR (Indian Rupee)</option>
-                <option value="BRL">R$ BRL (Brazilian Real)</option>
-                <option value="JPY">¥ JPY (Japanese Yen)</option>
-                <option value="CHF">CHF (Swiss Franc)</option>
-                <option value="SEK">kr SEK (Swedish Krona)</option>
-                <option value="NOK">kr NOK (Norwegian Krone)</option>
-                <option value="DKK">kr DKK (Danish Krone)</option>
-                <option value="PLN">zł PLN (Polish Zloty)</option>
-                <option value="MXN">$ MXN (Mexican Peso)</option>
-                <option value="ZAR">R ZAR (South African Rand)</option>
-                <option value="SGD">$ SGD (Singapore Dollar)</option>
-                <option value="HKD">$ HKD (Hong Kong Dollar)</option>
-                <option value="KRW">₩ KRW (South Korean Won)</option>
-                <option value="TRY">₺ TRY (Turkish Lira)</option>
-            </select>
-        </div>
-
         <!-- Services -->
         <section class="services">
             <h2>What I Handle For You</h2>
@@ -143,26 +110,22 @@
                 <div class="service-card">
                     <h3>Online Booking System</h3>
                     <p>Clients book themselves 24/7. Automated confirmations, reminders, calendar sync. No more phone tag, no more double-bookings.</p>
-                    <div class="price" data-gbp="350">£350 <span>one-time</span></div>
-                    <div class="price-local" id="price-booking"></div>
+                    <div class="price" data-gbp="350"><span class="amount">£350</span> <span>one-time</span></div>
                 </div>
                 <div class="service-card">
                     <h3>Payment Automation</h3>
                     <p>Stripe setup with deposits, recurring payments, and automatic invoicing. Get paid before the appointment. Stop chasing money.</p>
-                    <div class="price" data-gbp="200">£200 <span>one-time</span></div>
-                    <div class="price-local" id="price-payment"></div>
+                    <div class="price" data-gbp="200"><span class="amount">£200</span> <span>one-time</span></div>
                 </div>
                 <div class="service-card">
                     <h3>Client Follow-Up AI</h3>
                     <p>Automated WhatsApp & email sequences. Rebooking reminders, review requests, birthday messages. Clients stay loyal on autopilot.</p>
-                    <div class="price" data-gbp="300">£300 <span>one-time</span></div>
-                    <div class="price-local" id="price-followup"></div>
+                    <div class="price" data-gbp="300"><span class="amount">£300</span> <span>one-time</span></div>
                 </div>
                 <div class="service-card">
                     <h3>Full Business Setup</h3>
                     <p>Website, booking, payments, follow-ups, admin automation. Everything connected and running on autopilot. Done in 5 days.</p>
-                    <div class="price" data-gbp="750">£750 <span>one-time</span></div>
-                    <div class="price-local" id="price-full"></div>
+                    <div class="price" data-gbp="750"><span class="amount">£750</span> <span>one-time</span></div>
                 </div>
             </div>
         </section>
@@ -308,7 +271,7 @@
                     <p class="author">— James T.</p>
                     <p class="role">Massage Therapist, Bristol</p>
                 </div>
-                <div class="testimonial-card">
+                <div class="trust-card">
                     <div class="stars">★★★★★</div>
                     <p class="quote">"I was using Calendly but clients kept no-showing. Yeray integrated Stripe deposits and automated reminders. No-shows dropped to zero. I stopped chasing payments."</p>
                     <p class="author">— Priya K.</p>
@@ -332,49 +295,75 @@
     </div>
 
     <script>
-        // Currency conversion rates (approximate, GBP base)
+        // Currency rates (GBP base, approximate)
         const rates = {
-            GBP: { rate: 1, symbol: '£', name: 'GBP' },
-            USD: { rate: 1.27, symbol: '$', name: 'USD' },
-            EUR: { rate: 1.17, symbol: '€', name: 'EUR' },
-            AUD: { rate: 1.93, symbol: '$', name: 'AUD' },
-            CAD: { rate: 1.72, symbol: '$', name: 'CAD' },
-            NZD: { rate: 2.10, symbol: '$', name: 'NZD' },
-            INR: { rate: 105.5, symbol: '₹', name: 'INR' },
-            BRL: { rate: 6.35, symbol: 'R$', name: 'BRL' },
-            JPY: { rate: 191, symbol: '¥', name: 'JPY' },
-            CHF: { rate: 1.13, symbol: 'CHF', name: 'CHF' },
-            SEK: { rate: 13.4, symbol: 'kr', name: 'SEK' },
-            NOK: { rate: 13.8, symbol: 'kr', name: 'NOK' },
-            DKK: { rate: 8.72, symbol: 'kr', name: 'DKK' },
-            PLN: { rate: 5.05, symbol: 'zł', name: 'PLN' },
-            MXN: { rate: 21.5, symbol: '$', name: 'MXN' },
-            ZAR: { rate: 23.8, symbol: 'R', name: 'ZAR' },
-            SGD: { rate: 1.71, symbol: '$', name: 'SGD' },
-            HKD: { rate: 9.92, symbol: '$', name: 'HKD' },
-            KRW: { rate: 1710, symbol: '₩', name: 'KRW' },
-            TRY: { rate: 41.5, symbol: '₺', name: 'TRY' }
+            GBP: { rate: 1, symbol: '£' },
+            USD: { rate: 1.27, symbol: '$' },
+            EUR: { rate: 1.17, symbol: '€' },
+            AUD: { rate: 1.93, symbol: '$' },
+            CAD: { rate: 1.72, symbol: '$' },
+            NZD: { rate: 2.10, symbol: '$' },
+            INR: { rate: 105.5, symbol: '₹' },
+            BRL: { rate: 6.35, symbol: 'R$' },
+            JPY: { rate: 191, symbol: '¥' },
+            CHF: { rate: 1.13, symbol: 'CHF' },
+            SEK: { rate: 13.4, symbol: 'kr' },
+            NOK: { rate: 13.8, symbol: 'kr' },
+            DKK: { rate: 8.72, symbol: 'kr' },
+            PLN: { rate: 5.05, symbol: 'zł' },
+            MXN: { rate: 21.5, symbol: '$' },
+            ZAR: { rate: 23.8, symbol: 'R' },
+            SGD: { rate: 1.71, symbol: '$' },
+            HKD: { rate: 9.92, symbol: '$' },
+            KRW: { rate: 1710, symbol: '₩' },
+            TRY: { rate: 41.5, symbol: '₺' }
         };
 
-        function updatePrices() {
-            const currency = document.getElementById('currency-select').value;
+        // Country code to currency mapping
+        const countryToCurrency = {
+            US: 'USD', GB: 'GBP', DE: 'EUR', FR: 'EUR', ES: 'EUR', IT: 'EUR',
+            NL: 'EUR', BE: 'EUR', AT: 'EUR', PT: 'EUR', IE: 'EUR', FI: 'EUR',
+            GR: 'EUR', LU: 'EUR', SK: 'EUR', SI: 'EUR', EE: 'EUR', LV: 'EUR',
+            LT: 'EUR', MT: 'EUR', CY: 'EUR', AU: 'AUD', CA: 'CAD', NZ: 'NZD',
+            IN: 'INR', BR: 'BRL', JP: 'JPY', CH: 'CHF', SE: 'SEK', NO: 'NOK',
+            DK: 'DKK', PL: 'PLN', MX: 'MXN', ZA: 'ZAR', SG: 'SGD', HK: 'HKD',
+            KR: 'KRW', TR: 'TRY'
+        };
+
+        function applyCurrency(currency) {
             const c = rates[currency];
+            if (!c) return;
             const prices = document.querySelectorAll('.price[data-gbp]');
             prices.forEach(el => {
                 const gbp = parseFloat(el.dataset.gbp);
                 const converted = Math.round(gbp * c.rate);
-                const localEl = el.nextElementSibling;
-                if (localEl && localEl.classList.contains('price-local')) {
-                    if (currency === 'GBP') {
-                        localEl.textContent = '';
-                    } else {
-                        localEl.textContent = `≈ ${c.symbol}${converted} ${c.name}`;
-                    }
+                const amountEl = el.querySelector('.amount');
+                if (amountEl) {
+                    amountEl.textContent = c.symbol + converted;
                 }
             });
         }
 
-        document.getElementById('currency-select').addEventListener('change', updatePrices);
+        // Auto-detect location via IP
+        function detectCurrency() {
+            fetch('https://ipapi.co/json/')
+                .then(res => res.json())
+                .then(data => {
+                    const country = data.country_code;
+                    const currency = countryToCurrency[country] || 'GBP';
+                    applyCurrency(currency);
+                })
+                .catch(() => {
+                    // Fallback: try browser language
+                    const lang = navigator.language || navigator.userLanguage;
+                    const region = lang.split('-')[1];
+                    const currency = countryToCurrency[region] || 'GBP';
+                    applyCurrency(currency);
+                });
+        }
+
+        // Run on load
+        detectCurrency();
 
         // Collapsible questionnaire
         function toggleQuestionnaire() {
