@@ -497,7 +497,9 @@
             IN:'INR',BR:'BRL',JP:'JPY',CH:'CHF',SE:'SEK',NO:'NOK',DK:'DKK',PL:'PLN',
             MX:'MXN',ZA:'ZAR',SG:'SGD',HK:'HKD',KR:'KRW',TR:'TRY'
         };
+        var currentCurrency = 'GBP';
         function applyCurrency(cur) {
+            currentCurrency = cur;
             const c = rates[cur]; if (!c) return;
             document.querySelectorAll('.price[data-gbp]').forEach(el => {
                 const amt = el.querySelector('.amount');
@@ -558,12 +560,18 @@
             items.innerHTML = cart.map(function(id){
                 return '<span class="cart-item">'+services[id].name+' <span class="remove" onclick="removeFromCart(\''+id+'\')">✕</span></span>';
             }).join('');
-            var totalGBP = cart.reduce(function(s,id){return s+services[id].gbp;},0);
-            var totalEUR = cart.reduce(function(s,id){return s+services[id].eur;},0);
+            var c = rates[currentCurrency] || rates.GBP;
+            var totalOneTime = 0;
+            var totalMonthly = 0;
+            cart.forEach(function(id){
+                var s = services[id];
+                if (s.gbp > 0) totalOneTime += s.gbp * c.rate;
+                if (s.eur > 0) totalMonthly += s.eur * c.rate / rates.EUR.rate;
+            });
             var str = '';
-            if (totalGBP) str += '£'+totalGBP;
-            if (totalGBP && totalEUR) str += ' + ';
-            if (totalEUR) str += '€'+totalEUR+'/mo';
+            if (totalOneTime > 0) str += c.symbol + Math.round(totalOneTime);
+            if (totalOneTime > 0 && totalMonthly > 0) str += ' + ';
+            if (totalMonthly > 0) str += c.symbol + Math.round(totalMonthly) + '/mo';
             total.textContent = str;
         }
         var stripeLinks = {
