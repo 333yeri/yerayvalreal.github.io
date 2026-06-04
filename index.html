@@ -51,6 +51,8 @@
         .anim-delay-2 { transition-delay: 0.2s; }
         .anim-delay-3 { transition-delay: 0.3s; }
         .anim-delay-4 { transition-delay: 0.4s; }
+        .anim-delay-5 { transition-delay: 0.5s; }
+        .anim-delay-6 { transition-delay: 0.6s; }
 
         /* Header */
         header { padding: 80px 0 56px; text-align: center; }
@@ -140,6 +142,14 @@
         .q-submit button { background: var(--accent); color: #fff; padding: 14px 40px; border: none; border-radius: var(--radius-sm); font-size: 0.95rem; font-weight: 500; cursor: pointer; font-family: var(--font); transition: background 0.2s, transform 0.2s, box-shadow 0.3s; letter-spacing: -0.16px; }
         .q-submit button:hover { background: var(--accent-text); transform: translateY(-1px); box-shadow: var(--shadow-glow); }
 
+        /* Steps */
+        .next-steps { padding: 64px 0; }
+        .steps-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+        .step-card { background: var(--bg-elevated); border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow-border); position: relative; }
+        .step-num { font-size: 2rem; font-weight: 700; color: var(--accent); opacity: 0.3; margin-bottom: 8px; line-height: 1; }
+        .step-card h4 { font-size: 0.92rem; margin-bottom: 8px; font-weight: 600; letter-spacing: -0.16px; }
+        .step-card p { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6; }
+
         /* Trust */
         .trust { padding: 64px 0; }
         .trust-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -200,7 +210,8 @@
             .service-grid { grid-template-columns: 1fr; }
             .portfolio-grid { grid-template-columns: 1fr; }
             .testimonial-grid { grid-template-columns: 1fr; }
-            .trust-grid { grid-template-columns: 1fr; }
+            .steps-grid { grid-template-columns: 1fr; }
+            .trusted-grid { grid-template-columns: 1fr; }
             .about-inner { flex-direction: column; text-align: center; padding: 28px; }
             .trusted-names { gap: 16px; }
             .capture-form { flex-direction: column; }
@@ -335,32 +346,85 @@
                     <input type="text" name="business" placeholder="e.g. yoga instructor, massage therapist, dog groomer..." required>
                 </div>
                 <div class="q-block">
-                    <label>What do you need?</label>
+                    <label>What did you just pay for?</label>
                     <div class="q-block" style="margin-bottom:8px;">
-                        <label style="font-weight:400;font-size:0.82rem;color:var(--text-secondary);display:flex;align-items:center;gap:6px;"><input type="checkbox" name="needs" value="booking" style="accent-color:var(--accent);"> Online booking system</label>
+                        <label style="font-weight:400;font-size:0.82rem;color:var(--text-secondary);display:flex;align-items:center;gap:6px;"><input type="checkbox" name="paidfor" value="booking" style="accent-color:var(--accent);"> Online booking system</label>
                     </div>
                     <div class="q-block" style="margin-bottom:8px;">
-                        <label style="font-weight:400;font-size:0.82rem;color:var(--text-secondary);display:flex;align-items:center;gap:6px;"><input type="checkbox" name="needs" value="payments" style="accent-color:var(--accent);"> Payment / deposit setup</label>
+                        <label style="font-weight:400;font-size:0.82rem;color:var(--text-secondary);display:flex;align-items:center;gap:6px;"><input type="checkbox" name="paidfor" value="payments" style="accent-color:var(--accent);"> Payment / deposit setup</label>
                     </div>
                     <div class="q-block" style="margin-bottom:8px;">
-                        <label style="font-weight:400;font-size:0.82rem;color:var(--text-secondary);display:flex;align-items:center;gap:6px;"><input type="checkbox" name="needs" value="website" style="accent-color:var(--accent);"> New website</label>
+                        <label style="font-weight:400;font-size:0.82rem;color:var(--text-secondary);display:flex;align-items:center;gap:6px;"><input type="checkbox" name="paidfor" value="website" style="accent-color:var(--accent);"> New website</label>
                     </div>
                     <div class="q-block" style="margin-bottom:8px;">
-                        <label style="font-weight:400;font-size:0.82rem;color:var(--text-secondary);display:flex;align-items:center;gap:6px;"><input type="checkbox" name="needs" value="followup" style="accent-color:var(--accent);"> Client follow-up automation</label>
+                        <label style="font-weight:400;font-size:0.82rem;color:var(--text-secondary);display:flex;align-items:center;gap:6px;"><input type="checkbox" name="paidfor" value="followup" style="accent-color:var(--accent);"> Client follow-up automation</label>
+                    </div>
+                    <div class="q-block" style="margin-bottom:8px;">
+                        <label style="font-weight:400;font-size:0.82rem;color:var(--text-secondary);display:flex;align-items:center;gap:6px;"><input type="checkbox" name="paidfor" value="admin" style="accent-color:var(--accent);"> Administration automation</label>
                     </div>
                     <div class="q-block" style="margin-bottom:0;">
-                        <label style="font-weight:400;font-size:0.82rem;color:var(--text-secondary);display:flex;align-items:center;gap:6px;"><input type="checkbox" name="needs" value="admin" style="accent-color:var(--accent);"> Administration automation</label>
+                        <label style="font-weight:400;font-size:0.82rem;color:var(--text-secondary);display:flex;align-items:center;gap:6px;"><input type="checkbox" name="paidfor" value="retainer" style="accent-color:var(--accent);"> Ongoing support (monthly)</label>
                     </div>
                 </div>
                 <div class="q-block">
-                    <label>Tell me more</label>
-                    <textarea name="details" placeholder="What's annoying you most? What should the website look like? Any special requirements?"></textarea>
+                    <label>Do you have a website already?</label>
+                    <div style="display:flex;gap:12px;margin-top:4px;">
+                        <label style="font-weight:400;font-size:0.82rem;color:var(--text-secondary);display:flex;align-items:center;gap:6px;"><input type="radio" name="haswebsite" value="yes" style="accent-color:var(--accent);"> Yes</label>
+                        <label style="font-weight:400;font-size:0.82rem;color:var(--text-secondary);display:flex;align-items:center;gap:6px;"><input type="radio" name="haswebsite" value="no" style="accent-color:var(--accent);"> No</label>
+                        <label style="font-weight:400;font-size:0.82rem;color:var(--text-secondary);display:flex;align-items:center;gap:6px;"><input type="radio" name="haswebsite" value="needsone" style="accent-color:var(--accent);"> I need one</label>
+                    </div>
+                </div>
+                <div class="q-block">
+                    <label>What's the most annoying part of running your business right now?</label>
+                    <textarea name="pain" placeholder="e.g. clients not showing up, chasing payments, spending hours on messages, can't take bookings online..."></textarea>
+                </div>
+                <div class="q-block">
+                    <label>Anything else you want me to know?</label>
+                    <textarea name="details" placeholder="Your business goals, timeline, special requirements, questions..."></textarea>
                 </div>
                 <div class="q-submit">
                     <button type="submit">Send — I'll get back to you within 24h</button>
                     <p style="margin-top: 16px; font-size: 0.8rem; color: var(--text-muted); font-style: italic;">I love figuring out how to improve your already great business by making it greater — while I get to have fun fixing all of this.</p>
                 </div>
             </form>
+        </section>
+
+        <!-- What Happens After You Pay -->
+        <section class="next-steps">
+            <h2 class="anim">What Happens After You Pay</h2>
+            <p class="section-subtitle">Here's exactly what to expect. No surprises.</p>
+            <div class="steps-grid">
+                <div class="step-card anim anim-delay-1">
+                    <div class="step-num">1</div>
+                    <h4>You pay via Stripe</h4>
+                    <p>Secure payment, instant confirmation. You get a receipt. I get notified.</p>
+                </div>
+                <div class="step-card anim anim-delay-2">
+                    <div class="step-num">2</div>
+                    <h4>You fill out the form</h4>
+                    <p>Tell me about your business, what you paid for, and what's annoying you. Takes 2 minutes.</p>
+                </div>
+                <div class="step-card anim anim-delay-3">
+                    <div class="step-num">3</div>
+                    <h4>I review everything</h4>
+                    <p>I look at your business, your needs, and figure out the best approach. I'll reach out within 24 hours.</p>
+                </div>
+                <div class="step-card anim anim-delay-4">
+                    <div class="step-num">4</div>
+                    <h4>I build and deliver</h4>
+                    <p>Most projects done in 3-5 days. You get updates along the way. I don't disappear.</p>
+                </div>
+                <div class="step-card anim anim-delay-5">
+                    <div class="step-num">5</div>
+                    <h4>I check in after</h4>
+                    <p>A week after delivery I make sure everything's running. If something's off, I fix it. That's included.</p>
+                </div>
+                <div class="step-card anim anim-delay-6">
+                    <div class="step-num">6</div>
+                    <h4>We find what else you need</h4>
+                    <p>Once the basics are running, I'll spot what else could save you time — better workflows, marketing tweaks, automation you didn't know existed.</p>
+                </div>
+            </div>
         </section>
 
         <!-- Trust -->
@@ -600,17 +664,21 @@
             cart.forEach(function(id){ window.open(stripeLinks[id], '_blank'); });
         }
 
-        // Form submission — opens Gmail draft
+        // Form submission — opens Gmail draft with structured data
         function submitForm(form) {
-            var name = encodeURIComponent(form.name.value);
-            var email = encodeURIComponent(form.email.value);
-            var business = encodeURIComponent(form.business.value);
-            var details = encodeURIComponent(form.details.value || '');
-            var needs = [];
-            form.querySelectorAll('input[name="needs"]:checked').forEach(function(n) { needs.push(n.value); });
-            var needsStr = needs.join(', ');
-            var body = 'Name: ' + decodeURIComponent(name) + '\nEmail: ' + decodeURIComponent(email) + '\nBusiness: ' + decodeURIComponent(business) + '\nNeeds: ' + needsStr + '\nDetails: ' + decodeURIComponent(details);
-            window.open('https://mail.google.com/mail/?view=cm&to=yerayvalreal@gmail.com&su=New%20Client%20Form&body=' + encodeURIComponent(body), '_blank');
+            var name = form.name.value;
+            var email = form.email.value;
+            var business = form.business.value;
+            var pain = form.pain.value || 'Not specified';
+            var details = form.details.value || 'Not specified';
+            var haswebsite = form.haswebsite ? (form.haswebsite.value || 'Not specified') : 'Not specified';
+            var paidfor = [];
+            if (form.querySelectorAll) {
+                form.querySelectorAll('input[name="paidfor"]:checked').forEach(function(n) { paidfor.push(n.value); });
+            }
+            var paidforStr = paidfor.length ? paidfor.join(', ') : 'Not specified';
+            var body = '=== NEW CLIENT FORM ===\n\nName: ' + name + '\nEmail: ' + email + '\nBusiness: ' + business + '\nHas website: ' + haswebsite + '\nPaid for: ' + paidforStr + '\n\nBiggest pain point:\n' + pain + '\n\nOther details:\n' + details;
+            window.open('https://mail.google.com/mail/?view=cm&to=yerayvalreal@gmail.com&su=New%20Client%3A%20' + encodeURIComponent(name) + '%20-%20' + encodeURIComponent(business) + '&body=' + encodeURIComponent(body), '_blank');
             return false;
         }
 
