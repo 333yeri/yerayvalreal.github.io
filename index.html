@@ -275,7 +275,7 @@
                 <button class="q-toggle" onclick="toggleQuestionnaire()">Already paid? Tell me what you need <span class="arrow">▼</span></button>
             </div>
 
-            <form class="questionnaire" id="q-form" action="mailto:yerayvalreal@gmail.com" method="post" enctype="text/plain">
+            <form class="questionnaire" id="q-form" onsubmit="return submitForm(this)">
                 <div class="q-block">
                     <label>Your name</label>
                     <input type="text" name="name" placeholder="First name is fine" required>
@@ -327,9 +327,9 @@
                     <p>Stripe handles the payment. If I don't deliver, you can dispute the charge.</p>
                 </div>
                 <div class="trust-card anim anim-delay-2">
-                    <div class="icon">✅</div>
-                    <h4>I'm protected</h4>
-                    <p>Payment comes first. This filters out people who aren't serious.</p>
+                    <div class="icon">🤝</div>
+                    <h4>We're both protected</h4>
+                    <p>Payment comes first — that way we both know we're serious. Stripe handles everything securely.</p>
                 </div>
                 <div class="trust-card anim anim-delay-3">
                     <div class="icon">💳</div>
@@ -401,7 +401,7 @@
             </div>
             <div class="faq-item anim">
                 <div class="faq-q" onclick="toggleFaq(this)">I don't have a website yet? <span class="arrow">▼</span></div>
-                <div class="faq-a"><p>That's fine. I'll build one from scratch with everything integrated.</p></div>
+                <div class="faq-a"><p>Perfect — that's actually the best position to start from. I'll build you a clean, professional site with booking, payments, and follow-ups already integrated. No piecing together different tools. You'll get one complete system that just works.</p></div>
             </div>
         </section>
 
@@ -409,23 +409,25 @@
         <section class="capture">
             <h2 class="anim">Not ready to buy yet?</h2>
             <p>Get a free 1-page audit of your current booking process. I'll show you exactly where you're losing clients.</p>
-            <form class="capture-form" action="mailto:yerayvalreal@gmail.com?subject=Free%20Booking%20Audit%20Request" method="post" enctype="text/plain">
+            <form class="capture-form" onsubmit="return captureEmail(this)">
                 <input type="email" name="email" placeholder="your@email.com" required>
-                <button type="submit">Send Me the Audit</button>
+                <button type="submit">Get My Free Audit</button>
             </form>
+            <p style="margin-top: 12px; font-size: 0.72rem; color: var(--text-muted);">No spam. One email with your audit. Unsubscribe anytime.</p>
         </section>
 
         <!-- CTA -->
         <section class="cta">
             <h2 class="anim">Stop doing administration. Start doing your work.</h2>
             <p>Pay securely via Stripe, then fill out the form. I'll get back to you within 24 hours. No calls. No pressure.</p>
-            <button class="stripe-btn anim" onclick="handlePay()">🔒 Get Started — Pay Securely</button>
+            <a href="#" class="stripe-btn anim" onclick="return handlePay(event)">🔒 Get Started — Pay Securely</a>
             <p class="closer anim">I love figuring out how to improve your already great business by making it greater — while I get to have fun fixing all of this.</p>
         </section>
 
         <footer>
             <p>Yeray Val Real — Online Backend Specialist</p>
-            <p>yerayvalreal@gmail.com</p>
+            <p><a href="mailto:yerayvalreal@gmail.com" style="color:var(--accent-light);text-decoration:none;">yerayvalreal@gmail.com</a></p>
+            <p style="margin-top:8px;"><a href="https://wa.me/34612345678" style="color:var(--accent-light);text-decoration:none;">WhatsApp</a></p>
         </footer>
     </div>
 
@@ -472,10 +474,33 @@
         document.querySelectorAll('.anim').forEach(el => observer.observe(el));
 
         // Stripe payment handler
-        function handlePay() {
+        function handlePay(e) {
+            if (e) e.preventDefault();
             // TODO: Replace with your actual Stripe payment link
             alert('Stripe payment link goes here. Create one at buy.stripe.com and replace this alert with window.location.href = "your-stripe-link"');
             // window.location.href = 'https://buy.stripe.com/YOUR_LINK_HERE';
+            return false;
+        }
+
+        // Form submission — opens Gmail draft
+        function submitForm(form) {
+            var name = encodeURIComponent(form.name.value);
+            var email = encodeURIComponent(form.email.value);
+            var business = encodeURIComponent(form.business.value);
+            var details = encodeURIComponent(form.details.value || '');
+            var needs = [];
+            form.querySelectorAll('input[name="needs"]:checked').forEach(function(n) { needs.push(n.value); });
+            var needsStr = needs.join(', ');
+            var body = 'Name: ' + decodeURIComponent(name) + '\nEmail: ' + decodeURIComponent(email) + '\nBusiness: ' + decodeURIComponent(business) + '\nNeeds: ' + needsStr + '\nDetails: ' + decodeURIComponent(details);
+            window.open('https://mail.google.com/mail/?view=cm&to=yerayvalreal@gmail.com&su=New%20Client%20Form&body=' + encodeURIComponent(body), '_blank');
+            return false;
+        }
+
+        // Email capture — opens Gmail draft
+        function captureEmail(form) {
+            var email = encodeURIComponent(form.email.value);
+            window.open('https://mail.google.com/mail/?view=cm&to=yerayvalreal@gmail.com&su=Free%20Audit%20Request&body=Email%3A%20' + decodeURIComponent(email), '_blank');
+            return false;
         }
 
         // Questionnaire toggle
