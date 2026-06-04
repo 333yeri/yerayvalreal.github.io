@@ -78,7 +78,31 @@
         .service-card .price { font-size: 1.5rem; font-weight: 600; color: var(--accent-light); margin-top: 16px; letter-spacing: -0.64px; }
         .service-card .price span { font-size: 0.78rem; font-weight: 400; color: var(--text-muted); }
 
-        /* Portfolio */
+        /* Add to cart button */
+        .add-btn { display: block; width: 100%; margin-top: 16px; padding: 10px; background: var(--accent-bg); color: var(--accent-text); border: 1px solid rgba(138,184,154,0.25); border-radius: var(--radius-sm); font-size: 0.82rem; font-weight: 600; cursor: pointer; font-family: var(--font); transition: background 0.2s, border-color 0.2s; letter-spacing: -0.16px; }
+        .add-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .add-btn.added { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+        /* Retainer card */
+        .retainer-card { border: 1px solid rgba(138,184,154,0.2); }
+
+        /* Cart bar */
+        .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg-elevated); border-top: 1px solid var(--border-light); padding: 16px 24px; z-index: 100; display: none; box-shadow: 0 -4px 24px rgba(0,0,0,0.3); }
+        .cart-bar.open { display: block; animation: fadeUp 0.3s ease; }
+        .cart-inner { max-width: 820px; margin: 0 auto; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+        .cart-items { flex: 1; display: flex; gap: 8px; flex-wrap: wrap; min-width: 200px; }
+        .cart-item { background: var(--bg-subtle); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 6px 12px; font-size: 0.78rem; color: var(--text-secondary); display: flex; align-items: center; gap: 8px; }
+        .cart-item .remove { cursor: pointer; color: var(--text-muted); font-size: 0.9rem; line-height: 1; }
+        .cart-item .remove:hover { color: var(--text); }
+        .cart-total { font-size: 1rem; font-weight: 600; color: var(--accent-light); white-space: nowrap; }
+        .cart-pay-btn { background: var(--accent); color: #fff; padding: 12px 28px; border: none; border-radius: var(--radius-sm); font-size: 0.88rem; font-weight: 600; cursor: pointer; font-family: var(--font); transition: background 0.2s, box-shadow 0.3s; white-space: nowrap; }
+        .cart-pay-btn:hover { background: var(--accent-text); box-shadow: var(--shadow-glow); }
+
+        @media (max-width: 600px) {
+            .cart-inner { flex-direction: column; align-items: stretch; }
+            .cart-items { min-width: 0; }
+            .cart-total { text-align: center; }
+        }
         .portfolio { padding: 64px 0; }
         .portfolio-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
         .portfolio-card { background: var(--bg-elevated); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-card); transition: box-shadow 0.3s ease, transform 0.3s ease; }
@@ -208,29 +232,49 @@
         <!-- Services -->
         <section class="services">
             <h2 class="anim">What I Handle For You</h2>
+            <p class="section-subtitle">Add what you need. Pay once. No monthly fees.</p>
             <div class="service-grid">
-                <div class="service-card anim anim-delay-1">
+                <div class="service-card anim anim-delay-1" data-id="booking" data-name="Online Booking System" data-gbp="250">
                     <h3>Online Booking System</h3>
                     <p>Clients book themselves 24/7. Automated confirmations, reminders, calendar sync. No more phone tag, no more double-bookings.</p>
                     <div class="price" data-gbp="250"><span class="amount">£250</span> <span>one-time</span></div>
+                    <button class="add-btn" onclick="addToCart('booking')">+ Add</button>
                 </div>
-                <div class="service-card anim anim-delay-2">
+                <div class="service-card anim anim-delay-2" data-id="payments" data-name="Payment Automation" data-gbp="150">
                     <h3>Payment Automation</h3>
                     <p>Stripe setup with deposits, recurring payments, and automatic invoicing. Get paid before the appointment. Stop chasing money.</p>
                     <div class="price" data-gbp="150"><span class="amount">£150</span> <span>one-time</span></div>
+                    <button class="add-btn" onclick="addToCart('payments')">+ Add</button>
                 </div>
-                <div class="service-card anim anim-delay-3">
+                <div class="service-card anim anim-delay-3" data-id="followup" data-name="Client Follow-Up AI" data-gbp="200">
                     <h3>Client Follow-Up AI</h3>
                     <p>Automated WhatsApp & email sequences. Rebooking reminders, review requests, birthday messages. Clients stay loyal on autopilot.</p>
                     <div class="price" data-gbp="200"><span class="amount">£200</span> <span>one-time</span></div>
+                    <button class="add-btn" onclick="addToCart('followup')">+ Add</button>
                 </div>
-                <div class="service-card anim anim-delay-4">
+                <div class="service-card anim anim-delay-4" data-id="full" data-name="Full Business Setup" data-gbp="500">
                     <h3>Full Business Setup</h3>
-                    <p>Website, booking, payments, follow-ups, administration automation. Everything connected and running on autopilot. You'll have a working system within 5 days of payment.</p>
+                    <p>Website, booking, payments, follow-ups, administration automation. Everything connected. You'll have a working system within 5 days of payment.</p>
                     <div class="price" data-gbp="500"><span class="amount">£500</span> <span>one-time</span></div>
+                    <button class="add-btn" onclick="addToCart('full')">+ Add</button>
+                </div>
+                <div class="service-card anim retainer-card" data-id="retainer" data-name="Ongoing Support" data-eur="100">
+                    <h3>Ongoing Support</h3>
+                    <p>Up to 3 hours/month of updates, tweaks, and priority support. Your site stays running, secure, and fresh. Cancel anytime.</p>
+                    <div class="price" data-eur="100"><span class="amount">€100</span> <span>per month</span></div>
+                    <button class="add-btn" onclick="addToCart('retainer')">+ Add</button>
                 </div>
             </div>
         </section>
+
+        <!-- Cart -->
+        <div class="cart-bar" id="cartBar">
+            <div class="cart-inner">
+                <div class="cart-items" id="cartItems"></div>
+                <div class="cart-total" id="cartTotal"></div>
+                <button class="cart-pay-btn" onclick="checkout()">Pay Now — Secure Stripe</button>
+            </div>
+        </div>
 
         <!-- Portfolio -->
         <section class="portfolio">
@@ -270,7 +314,7 @@
             <p class="subtitle">Pay first — then tell me what you need. Secure Stripe payment. No risk.</p>
 
             <div style="text-align:center; margin-bottom: 8px;">
-                <button class="stripe-btn" onclick="handlePay()">🔒 Pay Now — Then Fill Out the Form</button>
+                <button class="stripe-btn" onclick="checkout()">🔒 Pay Now — Then Fill Out the Form</button>
             </div>
 
             <div style="text-align:center;">
@@ -422,7 +466,7 @@
         <section class="cta">
             <h2 class="anim">Stop doing administration. Start doing your work.</h2>
             <p>Pay securely via Stripe, then fill out the form. I'll get back to you within 24 hours. No calls. No pressure.</p>
-            <a href="#" class="stripe-btn anim" onclick="return handlePay(event)">🔒 Get Started — Pay Securely</a>
+            <a href="#" class="stripe-btn anim" onclick="checkout(); return false;">🔒 Get Started — Pay Securely</a>
             <p class="closer anim">I love figuring out how to improve your already great business by making it greater — while I get to have fun fixing all of this.</p>
         </section>
 
@@ -459,6 +503,13 @@
                 const amt = el.querySelector('.amount');
                 if (amt) amt.textContent = c.symbol + Math.round(parseFloat(el.dataset.gbp) * c.rate);
             });
+            document.querySelectorAll('.price[data-eur]').forEach(el => {
+                const amt = el.querySelector('.amount');
+                if (amt) {
+                    if (cur === 'EUR') amt.textContent = c.symbol + el.dataset.eur;
+                    else amt.textContent = c.symbol + Math.round(parseFloat(el.dataset.eur) * c.rate / rates.EUR.rate);
+                }
+            });
         }
         function detectCurrency() {
             fetch('https://ipapi.co/json/').then(r => r.json()).then(d => {
@@ -475,13 +526,51 @@
         }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
         document.querySelectorAll('.anim').forEach(el => observer.observe(el));
 
-        // Stripe payment handler
-        function handlePay(e) {
-            if (e) e.preventDefault();
-            // TODO: Replace with your actual Stripe payment link
-            alert('Stripe payment link goes here. Create one at buy.stripe.com and replace this alert with window.location.href = "your-stripe-link"');
-            // window.location.href = 'https://buy.stripe.com/YOUR_LINK_HERE';
-            return false;
+        // Cart
+        var cart = [];
+        var services = {
+            booking: {name:'Booking System', gbp:250, eur:0},
+            payments: {name:'Payment Automation', gbp:150, eur:0},
+            followup: {name:'Client Follow-Up AI', gbp:200, eur:0},
+            full: {name:'Full Business Setup', gbp:500, eur:0},
+            retainer: {name:'Ongoing Support', gbp:0, eur:100}
+        };
+        function addToCart(id) {
+            if (cart.indexOf(id) === -1) {
+                cart.push(id);
+                document.querySelector('.service-card[data-id="'+id+'"] .add-btn').classList.add('added');
+                document.querySelector('.service-card[data-id="'+id+'"] .add-btn').textContent = '✓ Added';
+            }
+            updateCart();
+        }
+        function removeFromCart(id) {
+            cart = cart.filter(function(x){return x!==id;});
+            var btn = document.querySelector('.service-card[data-id="'+id+'"] .add-btn');
+            if (btn) { btn.classList.remove('added'); btn.textContent = '+ Add'; }
+            updateCart();
+        }
+        function updateCart() {
+            var bar = document.getElementById('cartBar');
+            var items = document.getElementById('cartItems');
+            var total = document.getElementById('cartTotal');
+            if (cart.length === 0) { bar.classList.remove('open'); return; }
+            bar.classList.add('open');
+            items.innerHTML = cart.map(function(id){
+                return '<span class="cart-item">'+services[id].name+' <span class="remove" onclick="removeFromCart(\''+id+'\')">✕</span></span>';
+            }).join('');
+            var totalGBP = cart.reduce(function(s,id){return s+services[id].gbp;},0);
+            var totalEUR = cart.reduce(function(s,id){return s+services[id].eur;},0);
+            var str = '';
+            if (totalGBP) str += '£'+totalGBP;
+            if (totalGBP && totalEUR) str += ' + ';
+            if (totalEUR) str += '€'+totalEUR+'/mo';
+            total.textContent = str;
+        }
+        function checkout() {
+            // TODO: Replace with your Stripe payment link(s)
+            // For now, show alert with cart contents
+            var items = cart.map(function(id){return services[id].name;}).join(', ');
+            alert('Stripe checkout for: ' + items + '\n\nReplace this with your actual Stripe payment links. Create them at buy.stripe.com or your Stripe Dashboard.');
         }
 
         // Form submission — opens Gmail draft
