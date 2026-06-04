@@ -566,11 +566,30 @@
             if (totalEUR) str += '€'+totalEUR+'/mo';
             total.textContent = str;
         }
+        var stripeLinks = {
+            booking: 'https://buy.stripe.com/9B6aEZ8TF3lOgOoeBkfIs05',
+            payments: 'https://buy.stripe.com/28E14pgm7e0sfKk9h0fIs06',
+            followup: 'https://buy.stripe.com/14AdRbfi37C48hSal4fIs02',
+            full: 'https://buy.stripe.com/4gM4gBgm73lOgOoctcfIs01',
+            retainer: 'https://buy.stripe.com/4gM00l0n96y0cy8ctcfIs03'
+        };
         function checkout() {
-            // TODO: Replace with your Stripe payment link(s)
-            // For now, show alert with cart contents
-            var items = cart.map(function(id){return services[id].name;}).join(', ');
-            alert('Stripe checkout for: ' + items + '\n\nReplace this with your actual Stripe payment links. Create them at buy.stripe.com or your Stripe Dashboard.');
+            if (cart.length === 0) return;
+            // Single item — go straight to its Stripe link
+            if (cart.length === 1) {
+                window.open(stripeLinks[cart[0]], '_blank');
+                return;
+            }
+            // Retainer only
+            if (cart.length === 1 && cart[0] === 'retainer') {
+                window.open(stripeLinks.retainer, '_blank');
+                return;
+            }
+            // Multiple items — open each link with instructions
+            var links = cart.map(function(id){ return services[id].name + ': ' + stripeLinks[id]; });
+            var msg = 'Please complete each payment:\n\n' + links.join('\n\n');
+            alert(msg + '\n\nEach link will open in a new tab.');
+            cart.forEach(function(id){ window.open(stripeLinks[id], '_blank'); });
         }
 
         // Form submission — opens Gmail draft
