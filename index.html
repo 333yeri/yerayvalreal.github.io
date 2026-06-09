@@ -1,1391 +1,467 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yeray Val Real — Websites That Feel Like Films</title>
-<meta name="description" content="Cinematic websites powered by AI and automation. Booking, payments, follow-up — all built for service businesses that refuse to look generic.">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-
-<style>
-:root {
-  --bg: #0c1016;
-  --bg-elevated: #111820;
-  --bg-card: #0f1419;
-  --text: #e8edf0;
-  --text-muted: #6b7a85;
-  --text-dim: #3d4a55;
-  --accent: #c4a35a;
-  --accent-dim: rgba(196, 163, 90, 0.12);
-  --border: rgba(232, 237, 240, 0.06);
-  --border-light: rgba(232, 237, 240, 0.1);
-  --font-display: 'Cormorant Garamond', Georgia, serif;
-  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
-}
-
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-html {
-  scroll-behavior: smooth;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-body {
-  font-family: var(--font-body);
-  font-size: 16px;
-  line-height: 1.6;
-  color: var(--text);
-  background: var(--bg);
-  overflow-x: hidden;
-}
-
-::selection { background: var(--accent); color: var(--bg); }
-
-/* ===== TYPOGRAPHY ===== */
-h1, h2, h3 {
-  font-family: var(--font-display);
-  font-weight: 300;
-  line-height: 1.1;
-  color: var(--text);
-}
-
-h1 { font-size: clamp(52px, 9vw, 130px); letter-spacing: -0.03em; }
-h2 { font-size: clamp(32px, 4.5vw, 60px); letter-spacing: -0.02em; }
-h3 { font-size: clamp(22px, 2.2vw, 30px); font-weight: 400; }
-
-h4 {
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--text-muted);
-}
-
-p {
-  font-size: 16px;
-  line-height: 1.7;
-  color: var(--text-muted);
-  max-width: 540px;
-}
-
-a { color: var(--text); text-decoration: none; transition: color 0.3s var(--ease-out); }
-a:hover { color: var(--accent); }
-
-/* ===== LAYOUT ===== */
-.container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 32px;
-}
-
-section { padding: 160px 0; position: relative; }
-
-/* ===== NAV ===== */
-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
-  padding: 20px 32px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: background 0.4s var(--ease-out), backdrop-filter 0.4s var(--ease-out);
-  pointer-events: none;
-}
-nav > * { pointer-events: auto; }
-nav.scrolled {
-  background: rgba(12, 16, 22, 0.92);
-  backdrop-filter: blur(16px);
-}
-
-.nav-logo {
-  font-family: var(--font-display);
-  font-size: 20px;
-  font-weight: 300;
-  color: var(--text);
-  letter-spacing: 0.02em;
-}
-
-.nav-links { display: flex; gap: 32px; align-items: center; }
-
-.nav-links a {
-  font-size: 13px;
-  font-weight: 400;
-  color: var(--text-muted);
-  letter-spacing: 0.02em;
-  transition: color 0.3s var(--ease-out);
-}
-.nav-links a:hover { color: var(--text); }
-
-.nav-cta {
-  font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: 500;
-  padding: 10px 22px;
-  border: 1px solid var(--border-light);
-  border-radius: 100px;
-  color: var(--text);
-  background: transparent;
-  cursor: pointer;
-  transition: all 0.3s var(--ease-out);
-}
-.nav-cta:hover {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--bg);
-}
-
-/* ===== HERO — Cinematic opening ===== */
-.hero {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Animated gradient orb — the "cinematic" proof */
-.hero-orb {
-  position: absolute;
-  top: 50%;
-  right: -10%;
-  width: 600px;
-  height: 600px;
-  transform: translateY(-50%);
-  background: radial-gradient(circle, rgba(196, 163, 90, 0.08) 0%, transparent 70%);
-  border-radius: 50%;
-  animation: orbFloat 8s var(--ease-in-out) infinite;
-  pointer-events: none;
-}
-
-.hero-orb::before {
-  content: '';
-  position: absolute;
-  inset: 20%;
-  background: radial-gradient(circle, rgba(196, 163, 90, 0.06) 0%, transparent 60%);
-  border-radius: 50%;
-  animation: orbPulse 4s var(--ease-in-out) infinite;
-}
-
-.hero-content {
-  position: relative;
-  z-index: 2;
-  max-width: 800px;
-}
-
-.hero-eyebrow {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--accent);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  margin-bottom: 32px;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeUp 0.8s var(--ease-out) 0.2s forwards;
-}
-
-.hero-title {
-  margin-bottom: 32px;
-  opacity: 0;
-  transform: translateY(40px);
-  animation: fadeUp 1s var(--ease-out) 0.4s forwards;
-}
-
-.hero-title em {
-  font-style: italic;
-  font-weight: 300;
-}
-
-.hero-sub {
-  font-size: 18px;
-  line-height: 1.6;
-  color: var(--text-muted);
-  max-width: 460px;
-  margin-bottom: 48px;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeUp 0.8s var(--ease-out) 0.7s forwards;
-}
-
-.hero-cta {
-  display: flex;
-  gap: 24px;
-  align-items: center;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeUp 0.8s var(--ease-out) 0.9s forwards;
-}
-
-.btn-primary {
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 500;
-  padding: 16px 32px;
-  background: var(--accent);
-  color: var(--bg);
-  border: none;
-  border-radius: 100px;
-  cursor: pointer;
-  transition: all 0.3s var(--ease-out);
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-.btn-primary:hover {
-  background: var(--text);
-  transform: translateY(-2px);
-}
-
-.btn-secondary {
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 400;
-  color: var(--text-muted);
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  transition: color 0.3s var(--ease-out);
-}
-.btn-secondary:hover { color: var(--text); }
-.btn-secondary .arrow { transition: transform 0.3s var(--ease-out); }
-.btn-secondary:hover .arrow { transform: translateX(4px); }
-
-.hero-scroll {
-  position: absolute;
-  bottom: 48px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  opacity: 0;
-  animation: fadeIn 1s var(--ease-out) 1.4s forwards;
-}
-
-.hero-scroll span {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--text-dim);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-}
-
-.scroll-line {
-  width: 1px;
-  height: 48px;
-  background: linear-gradient(to bottom, var(--text-dim), transparent);
-  animation: scrollPulse 2s var(--ease-in-out) infinite;
-}
-
-/* ===== TRUST BAR ===== */
-.trust {
-  padding: 64px 0;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-
-.trust-label {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--text-dim);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  margin-bottom: 24px;
-}
-
-.trust-names {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 24px 48px;
-}
-
-.trust-name {
-  font-family: var(--font-display);
-  font-size: 22px;
-  font-weight: 300;
-  color: var(--text-muted);
-  opacity: 0.4;
-  transition: opacity 0.3s var(--ease-out);
-}
-.trust-name:hover { opacity: 1; }
-
-/* ===== WORK ===== */
-.work-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 80px;
-}
-.work-header p { text-align: right; }
-
-.work-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-}
-
-.work-card {
-  position: relative;
-  aspect-ratio: 16/10;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: all 0.5s var(--ease-out);
-}
-.work-card:hover {
-  border-color: var(--border-light);
-  transform: translateY(-4px);
-}
-
-.work-card-inner {
-  padding: 32px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.work-card-client {
-  font-family: var(--font-display);
-  font-size: 30px;
-  font-weight: 300;
-  color: var(--text);
-}
-
-.work-card-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-}
-
-.work-card-tags { display: flex; gap: 8px; flex-wrap: wrap; }
-
-.work-card-tag {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--text-dim);
-  padding: 4px 10px;
-  border: 1px solid var(--border);
-  border-radius: 100px;
-  letter-spacing: 0.05em;
-}
-
-.work-card-arrow {
-  font-size: 20px;
-  color: var(--text-dim);
-  transition: all 0.3s var(--ease-out);
-}
-.work-card:hover .work-card-arrow {
-  color: var(--accent);
-  transform: translate(4px, -4px);
-}
-
-/* ===== ABOUT / PERSONALITY ===== */
-.about {
-  padding: 160px 0;
-  border-top: 1px solid var(--border);
-}
-
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: start;
-}
-
-.about-text p {
-  font-size: 17px;
-  line-height: 1.8;
-  margin-bottom: 24px;
-}
-
-.about-text p:last-child { margin-bottom: 0; }
-
-.about-text strong {
-  color: var(--text);
-  font-weight: 500;
-}
-
-.about-visual {
-  position: relative;
-}
-
-.about-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  padding: 40px;
-}
-
-.about-card-label {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--text-dim);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  margin-bottom: 24px;
-}
-
-.about-stat {
-  margin-bottom: 32px;
-}
-.about-stat:last-child { margin-bottom: 0; }
-
-.about-stat-value {
-  font-family: var(--font-display);
-  font-size: 48px;
-  font-weight: 300;
-  color: var(--text);
-  line-height: 1;
-  margin-bottom: 8px;
-}
-
-.about-stat-label {
-  font-size: 13px;
-  color: var(--text-dim);
-}
-
-/* ===== SERVICES ===== */
-.services-header { margin-bottom: 80px; }
-.services-header h2 { max-width: 700px; }
-
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.service-card {
-  background: var(--bg);
-  padding: 48px;
-  transition: background 0.3s var(--ease-out);
-}
-.service-card:hover { background: var(--bg-elevated); }
-
-.service-number {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--text-dim);
-  letter-spacing: 0.1em;
-  margin-bottom: 24px;
-}
-
-.service-card h3 { margin-bottom: 16px; }
-
-.service-card p {
-  font-size: 14px;
-  line-height: 1.6;
-  margin-bottom: 24px;
-}
-
-.service-price {
-  display: flex;
-  align-items: baseline;
-  gap: 4px;
-}
-
-.service-price .amount {
-  font-family: var(--font-display);
-  font-size: 36px;
-  font-weight: 300;
-  color: var(--text);
-}
-
-.service-price .note {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--text-dim);
-  margin-left: auto;
-}
-
-.services-footer {
-  margin-top: 32px;
-  text-align: center;
-}
-.services-footer p {
-  margin: 0 auto;
-  text-align: center;
-  font-size: 14px;
-}
-.services-footer strong { color: var(--text); font-weight: 500; }
-
-/* ===== PROCESS — Cinematic, not documentation ===== */
-.process { padding: 160px 0; }
-
-.process-header { margin-bottom: 80px; }
-
-.process-timeline {
-  position: relative;
-  max-width: 700px;
-}
-
-.process-step {
-  display: grid;
-  grid-template-columns: 60px 1fr;
-  gap: 32px;
-  padding: 32px 0;
-  border-top: 1px solid var(--border);
-  opacity: 0;
-  transform: translateX(-20px);
-  transition: all 0.6s var(--ease-out);
-}
-.process-step.visible {
-  opacity: 1;
-  transform: translateX(0);
-}
-.process-step:last-child { border-bottom: 1px solid var(--border); }
-
-.process-step:hover { border-color: var(--accent); }
-
-.process-number {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--accent);
-  letter-spacing: 0.1em;
-  padding-top: 4px;
-}
-
-.process-step h3 {
-  font-family: var(--font-body);
-  font-size: 18px;
-  font-weight: 500;
-  margin-bottom: 8px;
-}
-
-.process-step p {
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-/* ===== WOW MOMENT — Interactive cinematic experience ===== */
-.wow { padding: 160px 0; text-align: center; }
-
-.wow-content { max-width: 700px; margin: 0 auto; }
-
-.wow h2 { margin-bottom: 24px; }
-
-.wow p {
-  margin: 0 auto 64px;
-  text-align: center;
-}
-
-.wow-stage {
-  position: relative;
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-  aspect-ratio: 16/9;
-  background: #060a0e;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  overflow: hidden;
-  cursor: pointer;
-}
-
-/* Vignette */
-.wow-stage::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at center, transparent 30%, var(--bg) 100%);
-  pointer-events: none;
-  z-index: 2;
-}
-
-/* Film grain */
-.wow-stage::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 3;
-}
-
-.wow-filmstrip {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  z-index: 1;
-}
-
-.wow-line {
-  font-family: var(--font-display);
-  font-size: clamp(22px, 3.5vw, 44px);
-  font-weight: 300;
-  color: var(--text);
-  opacity: 0;
-  transform: translateY(12px) scale(0.98);
-  transition: all 1s var(--ease-out);
-  line-height: 1.4;
-  will-change: opacity, transform;
-}
-
-.wow-line.visible {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-}
-
-.wow-line.accent {
-  color: var(--accent);
-  font-style: italic;
-}
-
-.wow-hint {
-  position: absolute;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--text-dim);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  z-index: 4;
-  transition: opacity 0.4s var(--ease-out);
-}
-
-.wow-stage.playing .wow-hint { opacity: 0; }
-
-/* ===== TESTIMONIALS ===== */
-.testimonials { padding: 160px 0; border-top: 1px solid var(--border); }
-
-.testimonials-header { margin-bottom: 80px; }
-
-.testimonial-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-}
-
-.testimonial-card {
-  padding: 32px;
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  transition: border-color 0.3s var(--ease-out);
-}
-.testimonial-card:hover { border-color: var(--border-light); }
-
-.testimonial-quote {
-  font-family: var(--font-display);
-  font-size: 22px;
-  font-weight: 300;
-  font-style: italic;
-  line-height: 1.5;
-  color: var(--text);
-  margin-bottom: 24px;
-}
-
-.testimonial-author {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.testimonial-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: var(--bg-elevated);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-display);
-  font-size: 14px;
-  color: var(--accent);
-  border: 1px solid var(--border);
-}
-
-.testimonial-name {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text);
-}
-
-.testimonial-role {
-  font-size: 12px;
-  color: var(--text-dim);
-}
-
-/* ===== FAQ ===== */
-.faq { padding: 160px 0; }
-
-.faq-header { margin-bottom: 80px; }
-
-.faq-list { max-width: 680px; }
-
-.faq-item { border-bottom: 1px solid var(--border); }
-
-.faq-question {
-  width: 100%;
-  padding: 28px 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: none;
-  border: none;
-  cursor: pointer;
-  text-align: left;
-  font-family: var(--font-body);
-  font-size: 16px;
-  font-weight: 400;
-  color: var(--text);
-  transition: color 0.3s var(--ease-out);
-}
-.faq-question:hover { color: var(--accent); }
-
-.faq-icon {
-  font-size: 20px;
-  color: var(--text-dim);
-  transition: transform 0.3s var(--ease-out);
-  flex-shrink: 0;
-  margin-left: 16px;
-}
-.faq-item.open .faq-icon { transform: rotate(45deg); }
-
-.faq-answer {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.5s var(--ease-out);
-}
-.faq-item.open .faq-answer { max-height: 200px; }
-
-.faq-answer p {
-  padding-bottom: 28px;
-  font-size: 14px;
-}
-
-/* ===== CTA ===== */
-.cta {
-  padding: 160px 0;
-  text-align: center;
-}
-
-.cta h2 {
-  max-width: 600px;
-  margin: 0 auto 24px;
-}
-
-.cta p {
-  margin: 0 auto 48px;
-  text-align: center;
-}
-
-.cta-buttons {
-  display: flex;
-  gap: 24px;
-  justify-content: center;
-  align-items: center;
-}
-
-.cta .btn-secondary {
-  font-size: 15px;
-}
-
-/* ===== FOOTER ===== */
-footer {
-  padding: 48px 0;
-  border-top: 1px solid var(--border);
-}
-
-.footer-inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.footer-links { display: flex; gap: 24px; }
-
-.footer-links a {
-  font-size: 13px;
-  color: var(--text-dim);
-  transition: color 0.3s var(--ease-out);
-}
-.footer-links a:hover { color: var(--text); }
-
-.footer-copy {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--text-dim);
-}
-
-/* ===== ANIMATIONS ===== */
-@keyframes fadeUp {
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeIn {
-  to { opacity: 1; }
-}
-
-@keyframes scrollPulse {
-  0%, 100% { opacity: 0.3; transform: scaleY(1); }
-  50% { opacity: 1; transform: scaleY(1.3); }
-}
-
-@keyframes orbFloat {
-  0%, 100% { transform: translateY(-50%) translateX(0); }
-  50% { transform: translateY(-50%) translateX(-30px); }
-}
-
-@keyframes orbPulse {
-  0%, 100% { opacity: 0.6; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.05); }
-}
-
-/* Scroll reveal — varied */
-.reveal {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.8s var(--ease-out);
-}
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.reveal-left {
-  opacity: 0;
-  transform: translateX(-30px);
-  transition: all 0.8s var(--ease-out);
-}
-.reveal-left.visible {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.reveal-scale {
-  opacity: 0;
-  transform: scale(0.96);
-  transition: all 0.8s var(--ease-out);
-}
-.reveal-scale.visible {
-  opacity: 1;
-  transform: scale(1);
-}
-
-/* Stagger children */
-.stagger > * {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.6s var(--ease-out);
-}
-.stagger.visible > *:nth-child(1) { transition-delay: 0.1s; }
-.stagger.visible > *:nth-child(2) { transition-delay: 0.2s; }
-.stagger.visible > *:nth-child(3) { transition-delay: 0.3s; }
-.stagger.visible > *:nth-child(4) { transition-delay: 0.4s; }
-.stagger.visible > *:nth-child(5) { transition-delay: 0.5s; }
-.stagger.visible > *:nth-child(6) { transition-delay: 0.6s; }
-.stagger.visible > * {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 768px) {
-  section { padding: 100px 0; }
-  .container { padding: 0 20px; }
-
-  .nav-links { display: none; }
-
-  .hero-orb { width: 300px; height: 300px; right: -20%; }
-
-  .work-grid { grid-template-columns: 1fr; }
-  .services-grid { grid-template-columns: 1fr; }
-  .testimonial-grid { grid-template-columns: 1fr; }
-  .about-grid { grid-template-columns: 1fr; gap: 48px; }
-
-  .work-header { flex-direction: column; align-items: flex-start; gap: 16px; }
-  .work-header p { text-align: left; }
-
-  .hero-cta { flex-direction: column; align-items: flex-start; }
-  .cta-buttons { flex-direction: column; }
-
-  .footer-inner { flex-direction: column; gap: 24px; text-align: center; }
-
-  .process-step { grid-template-columns: 40px 1fr; gap: 16px; }
-}
-
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-  html { scroll-behavior: auto; }
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yeray Val Real — Websites That Feel Like Films</title>
+  <meta name="description" content="Cinematic websites powered by AI and automation. Booking, payments, follow-up — all built for service businesses that refuse to look generic." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --charcoal: #1A1410; --dark: #0C1016; --bark: #2C2018; --espresso: #3D2B1F;
+      --gold: #C4A35A; --cream: #FAF6F0; --sand: #E8D5B7; --sage: #7C9B7A;
+      --text: #E8E0D8; --text-muted: rgba(232,224,216,0.45); --text-dim: rgba(232,224,216,0.25);
+      --border: rgba(232,224,216,0.06); --border-light: rgba(232,224,216,0.12);
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --container: 1120px; --radius: 12px; --radius-lg: 24px; --radius-pill: 999px;
+      --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --duration: 0.8s;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body { font-family: var(--font-sans); font-size: 16px; line-height: 1.6; color: var(--text); background: var(--charcoal); overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+    .container { max-width: var(--container); margin: 0 auto; padding: 0 24px; }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(48px); transition: opacity var(--duration) var(--ease-out), transform var(--duration) var(--ease-out); will-change: opacity, transform; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-l { opacity: 0; transform: translateX(-32px); transition: opacity var(--duration) var(--ease-out), transform var(--duration) var(--ease-out); will-change: opacity, transform; }
+    .reveal-l.visible { opacity: 1; transform: translateX(0); }
+    .reveal-r { opacity: 0; transform: translateX(32px); transition: opacity var(--duration) var(--ease-out), transform var(--duration) var(--ease-out); will-change: opacity, transform; }
+    .reveal-r.visible { opacity: 1; transform: translateX(0); }
+    .reveal-s { opacity: 0; transform: scale(0.96); transition: opacity var(--duration) var(--ease-out), transform var(--duration) var(--ease-out); will-change: opacity, transform; }
+    .reveal-s.visible { opacity: 1; transform: scale(1); }
+    .reveal-d-1 { transition-delay: 0.1s; } .reveal-d-2 { transition-delay: 0.2s; } .reveal-d-3 { transition-delay: 0.3s; } .reveal-d-4 { transition-delay: 0.4s; }
+    @media (prefers-reduced-motion: reduce) { .reveal, .reveal-l, .reveal-r, .reveal-s { opacity: 1 !important; transform: none !important; transition: none !important; } }
+
+    /* NAV */
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; transition: background 0.4s var(--ease), backdrop-filter 0.4s var(--ease); }
+    .nav.scrolled { background: rgba(26,20,16,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+    .nav .container { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .nav-logo { font-family: var(--font-serif); font-size: 22px; font-weight: 400; color: var(--cream); letter-spacing: 0.04em; }
+    .nav-logo span { color: var(--gold); font-style: italic; }
+    .nav-links { display: flex; align-items: center; gap: 8px; }
+    .nav-links a { font-size: 12px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); padding: 8px 16px; border-radius: var(--radius-pill); transition: color 0.3s var(--ease), background 0.3s var(--ease); }
+    .nav-links a:hover { color: var(--gold); background: rgba(196,163,90,0.06); }
+    .nav-cta { background: var(--gold) !important; color: var(--charcoal) !important; font-weight: 500 !important; padding: 10px 24px !important; }
+    .nav-cta:hover { background: var(--sand) !important; }
+
+    /* HERO */
+    .hero { position: relative; min-height: 100vh; display: flex; align-items: center; padding: 120px 0 80px; overflow: hidden; background: var(--charcoal); }
+    .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 70% 55% at 60% 50%, rgba(61,43,31,0.5) 0%, var(--charcoal) 70%); }
+    .hero-bg-2 { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 60%, rgba(26,20,16,0.9) 100%); }
+    .hero-grain { position: absolute; inset: 0; opacity: 0.02; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+    .hero-glow { position: absolute; top: 50%; right: 5%; width: 500px; height: 500px; transform: translate(50%,-50%); background: radial-gradient(circle, rgba(196,163,90,0.06) 0%, transparent 70%); pointer-events: none; }
+    .hero .container { position: relative; z-index: 2; }
+    .hero-content { max-width: 720px; }
+    .hero-overline { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 36px; display: flex; align-items: center; gap: 12px; opacity: 0; transform: translateY(16px); animation: up 0.8s var(--ease-out) 0.2s forwards; }
+    .hero-overline::before { content: ''; display: inline-block; width: 24px; height: 1px; background: var(--gold); }
+    .hero h1 { font-family: var(--font-serif); font-weight: 300; line-height: 1.06; color: var(--cream); margin-bottom: 36px; font-size: clamp(44px, 6.5vw, 88px); letter-spacing: -0.02em; }
+    .hero h1 .line { display: block; opacity: 0; transform: translateY(28px); }
+    .hero h1 .l1 { animation: up 0.8s var(--ease-out) 0.4s forwards; }
+    .hero h1 .l2 { animation: up 0.8s var(--ease-out) 0.55s forwards; }
+    .hero h1 .l3 { animation: up 0.8s var(--ease-out) 0.7s forwards; color: var(--gold); font-style: italic; font-weight: 400; }
+    .hero h1 .l4 { animation: up 0.8s var(--ease-out) 0.85s forwards; }
+    .hero-copy { font-size: 17px; line-height: 1.75; color: var(--text-muted); max-width: 480px; margin-bottom: 48px; opacity: 0; animation: up 0.8s var(--ease-out) 1.1s forwards; }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; opacity: 0; animation: up 0.8s var(--ease-out) 1.3s forwards; }
+    .hero-scroll { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--text-dim); font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0; animation: up 0.8s var(--ease-out) 2s forwards; }
+    .scroll-track { width: 1px; height: 60px; background: var(--border); position: relative; overflow: hidden; }
+    .scroll-track::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 24px; background: var(--gold); animation: scrollLine 2.4s var(--ease-out) infinite; }
+    @keyframes up { to { opacity: 1; transform: translateY(0); } }
+    @keyframes scrollLine { 0% { transform: translateY(-24px); opacity: 0; } 30% { opacity: 1; } 100% { transform: translateY(60px); opacity: 0; } }
+
+    /* BUTTONS */
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; border-radius: var(--radius-pill); font-size: 14px; font-weight: 500; letter-spacing: 0.02em; transition: all 0.3s var(--ease); border: none; }
+    .btn-primary { background: var(--gold); color: var(--charcoal); }
+    .btn-primary:hover { background: var(--sand); transform: translateY(-1px); }
+    .btn-ghost { border: 1px solid var(--border-light); color: var(--cream); }
+    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+    .btn-wa { background: #25D366; color: #fff; }
+    .btn-wa:hover { background: #20BD5A; }
+
+    /* SECTIONS */
+    .section { padding: 140px 0; }
+    .section-dark { background: var(--charcoal); }
+    .section-darker { background: var(--dark); }
+    .section-mid { background: var(--bark); }
+    .section-light { background: var(--cream); }
+    .section-light, .section-light p { color: rgba(44,32,24,0.6); }
+    .section-light h2, .section-light h3, .section-light h4 { color: var(--bark); }
+    .section-overline { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+    .section-overline::before { content: ''; display: inline-block; width: 24px; height: 1px; background: var(--gold); }
+    .section-light .section-overline { color: var(--espresso); }
+    .section-light .section-overline::before { background: var(--espresso); }
+    .section h2 { font-family: var(--font-serif); font-size: clamp(32px, 4vw, 52px); font-weight: 400; line-height: 1.12; margin-bottom: 20px; letter-spacing: -0.01em; }
+    .section-sub { font-size: 17px; line-height: 1.7; max-width: 540px; }
+
+    /* TRUST */
+    .trust { padding: 48px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .trust-label { font-family: var(--font-mono); font-size: 10px; color: var(--text-dim); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 20px; }
+    .trust-names { display: flex; flex-wrap: wrap; gap: 20px 40px; }
+    .trust-name { font-family: var(--font-serif); font-size: 20px; font-weight: 300; color: var(--text-muted); opacity: 0.35; transition: opacity 0.3s var(--ease); }
+    .trust-name:hover { opacity: 1; }
+
+    /* WORK */
+    .work-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 64px; }
+    .work-header p { text-align: right; font-size: 14px; }
+    .work-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .work-card { position: relative; aspect-ratio: 16/10; background: rgba(255,248,239,0.02); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: all 0.5s var(--ease); }
+    .work-card:hover { border-color: var(--gold); transform: translateY(-2px); }
+    .work-card-inner { padding: 32px; height: 100%; display: flex; flex-direction: column; justify-content: space-between; }
+    .work-card-client { font-family: var(--font-serif); font-size: 28px; font-weight: 300; color: var(--cream); }
+    .work-card-meta { display: flex; justify-content: space-between; align-items: flex-end; }
+    .work-card-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .work-card-tag { font-family: var(--font-mono); font-size: 10px; color: var(--text-dim); padding: 4px 10px; border: 1px solid var(--border); border-radius: var(--radius-pill); letter-spacing: 0.04em; }
+    .work-card-arrow { font-size: 18px; color: var(--text-dim); transition: all 0.3s var(--ease); }
+    .work-card:hover .work-card-arrow { color: var(--gold); transform: translate(3px, -3px); }
+
+    /* ABOUT */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .about-text h4 { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--espresso); margin-bottom: 16px; }
+    .about-text h2 { font-family: var(--font-serif); font-size: clamp(28px, 3.5vw, 44px); font-weight: 400; line-height: 1.15; margin-bottom: 28px; }
+    .about-text p { font-size: 16px; line-height: 1.85; margin-bottom: 18px; }
+    .about-text strong { color: var(--bark); font-weight: 500; }
+    .about-stats { background: rgba(44,32,24,0.03); border: 1px solid rgba(44,32,24,0.06); border-radius: var(--radius-lg); padding: 40px; }
+    .about-stat { margin-bottom: 28px; }
+    .about-stat:last-child { margin-bottom: 0; }
+    .about-stat-value { font-family: var(--font-serif); font-size: 48px; font-weight: 300; color: var(--bark); line-height: 1; margin-bottom: 6px; }
+    .about-stat-label { font-size: 13px; color: rgba(44,32,24,0.45); }
+
+    /* SERVICES */
+    .services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-top: 64px; }
+    .service-card { background: var(--charcoal); padding: 48px; transition: background 0.3s var(--ease); }
+    .service-card:hover { background: rgba(255,248,239,0.03); }
+    .service-number { font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); letter-spacing: 0.1em; margin-bottom: 24px; }
+    .service-card h3 { font-family: var(--font-serif); font-size: 24px; font-weight: 400; color: var(--cream); margin-bottom: 12px; }
+    .service-card p { font-size: 14px; line-height: 1.7; color: var(--text-muted); margin-bottom: 28px; }
+    .service-price { display: flex; align-items: baseline; gap: 6px; }
+    .service-price .amount { font-family: var(--font-serif); font-size: 36px; font-weight: 300; color: var(--cream); }
+    .service-price .note { font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); margin-left: auto; }
+    .services-footer { margin-top: 28px; text-align: center; font-size: 14px; color: var(--text-muted); }
+    .services-footer strong { color: var(--cream); font-weight: 500; }
+
+    /* PROCESS */
+    .process-timeline { max-width: 640px; margin-top: 64px; }
+    .process-step { display: grid; grid-template-columns: 56px 1fr; gap: 28px; padding: 28px 0; border-top: 1px solid rgba(44,32,24,0.06); }
+    .process-step:last-child { border-bottom: 1px solid rgba(44,32,24,0.06); }
+    .process-number { font-family: var(--font-mono); font-size: 11px; color: var(--espresso); letter-spacing: 0.1em; padding-top: 3px; }
+    .process-step h3 { font-size: 18px; font-weight: 500; color: var(--bark); margin-bottom: 6px; }
+    .process-step p { font-size: 14px; line-height: 1.65; }
+
+    /* WOW */
+    .wow { padding: 140px 0; text-align: center; }
+    .wow-content { max-width: 640px; margin: 0 auto; }
+    .wow-stage { position: relative; width: 100%; max-width: 720px; margin: 64px auto 0; aspect-ratio: 16/9; background: #080C12; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; cursor: pointer; }
+    .wow-stage::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 30%, var(--charcoal) 100%); pointer-events: none; z-index: 2; }
+    .wow-stage::after { content: ''; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events: none; z-index: 3; }
+    .wow-filmstrip { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; z-index: 1; }
+    .wow-line { font-family: var(--font-serif); font-size: clamp(20px, 3.5vw, 42px); font-weight: 300; color: var(--cream); opacity: 0; transform: translateY(12px) scale(0.98); transition: all 1s var(--ease-out); line-height: 1.4; will-change: opacity, transform; }
+    .wow-line.visible { opacity: 1; transform: translateY(0) scale(1); }
+    .wow-line.accent { color: var(--gold); font-style: italic; }
+    .wow-hint { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); font-family: var(--font-mono); font-size: 10px; color: var(--text-dim); letter-spacing: 0.2em; text-transform: uppercase; z-index: 4; transition: opacity 0.4s var(--ease); }
+    .wow-stage.playing .wow-hint { opacity: 0; }
+
+    /* FAQ */
+    .faq-list { max-width: 680px; margin: 64px auto 0; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-q { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 24px 0; font-size: 17px; font-weight: 400; color: var(--cream); text-align: left; background: none; border: none; cursor: pointer; font-family: var(--font-sans); transition: color 0.3s var(--ease); }
+    .faq-q:hover { color: var(--gold); }
+    .faq-q .icon { font-size: 20px; color: var(--gold); transition: transform 0.3s var(--ease); flex-shrink: 0; margin-left: 16px; }
+    .faq-item.open .faq-q .icon { transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s var(--ease); }
+    .faq-a-inner { padding: 0 0 24px; font-size: 15px; line-height: 1.75; color: var(--text-muted); }
+
+    /* CTA */
+    .cta { padding: 140px 0; text-align: center; }
+    .cta h2 { max-width: 600px; margin: 0 auto 20px; }
+    .cta p { margin: 0 auto 48px; text-align: center; }
+    .cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    /* FOOTER */
+    .footer { padding: 40px 0; border-top: 1px solid var(--border); }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; }
+    .footer-copy { font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: 13px; color: var(--text-dim); transition: color 0.3s var(--ease); }
+    .footer-links a:hover { color: var(--cream); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .section { padding: 100px 0; }
+      .nav-links { display: none; }
+      .hero-glow { width: 300px; height: 300px; }
+      .work-grid, .services-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .work-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .work-header p { text-align: left; }
+      .hero-actions, .cta-actions { flex-direction: column; align-items: flex-start; }
+      .footer-inner { flex-direction: column; gap: 20px; text-align: center; }
+      .process-step { grid-template-columns: 40px 1fr; gap: 16px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+      html { scroll-behavior: auto; }
+    }
+  </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav id="mainNav">
-  <a href="#" class="nav-logo">Yeray Val Real</a>
-  <div class="nav-links">
-    <a href="#work">Work</a>
-    <a href="#services">Services</a>
-    <a href="https://buy.stripe.com/4gM4gBgm73lOgOoctcfIs01" target="_blank" rel="noopener" class="nav-cta">Start a Project</a>
-  </div>
-</nav>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-orb"></div>
-  <div class="container">
-    <div class="hero-content">
-      <div class="hero-eyebrow">AI-Powered Web Experiences</div>
-      <h1 class="hero-title">Websites that feel<br><em>like films.</em></h1>
-      <p class="hero-sub">Cinematic websites powered by AI and automation. Booking, payments, follow-up — all built for service businesses that refuse to look generic.</p>
-      <div class="hero-cta">
-        <a href="https://buy.stripe.com/4gM4gBgm73lOgOoctcfIs01" target="_blank" rel="noopener" class="btn-primary">
-          Start Your Project
-          <span>→</span>
-        </a>
-        <a href="#work" class="btn-secondary">
-          See the work
-          <span class="arrow">→</span>
-        </a>
+  <nav class="nav" id="mainNav">
+    <div class="container">
+      <a href="#" class="nav-logo">Yeray<span>.</span></a>
+      <div class="nav-links">
+        <a href="#work">Work</a>
+        <a href="#services">Services</a>
+        <a href="#process">Process</a>
+        <a href="https://buy.stripe.com/4gM4gBgm73lOgOectcfIs01" target="_blank" rel="noopener" class="nav-cta">Start a Project</a>
       </div>
     </div>
-  </div>
-  <div class="hero-scroll">
-    <span>Scroll</span>
-    <div class="scroll-line"></div>
-  </div>
-</section>
+  </nav>
 
-<!-- TRUST -->
-<section class="trust">
-  <div class="container">
-    <div class="trust-label">Trusted by</div>
-    <div class="trust-names stagger">
-      <span class="trust-name">Daria Klymenko</span>
-      <span class="trust-name">Sarah Mitchell</span>
-      <span class="trust-name">James Thornton</span>
-      <span class="trust-name">Priya Kapoor</span>
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-bg-2"></div>
+    <div class="hero-grain"></div>
+    <div class="hero-glow"></div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-overline">AI-Powered Web Experiences</div>
+        <h1>
+          <span class="line l1">Websites that feel</span>
+          <span class="line l2">like films.</span>
+          <span class="line l3">Built with AI.</span>
+          <span class="line l4">Delivered in days.</span>
+        </h1>
+        <p class="hero-copy">Cinematic websites, booking systems, payments, and automation — all built for service businesses that refuse to look generic.</p>
+        <div class="hero-actions">
+          <a href="https://buy.stripe.com/4gM4gBgm73lOgOectcfIs01" target="_blank" rel="noopener" class="btn btn-primary">Start Your Project <span>→</span></a>
+          <a href="#work" class="btn btn-ghost">See the Work</a>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+    <div class="hero-scroll"><div class="scroll-track"></div></div>
+  </section>
 
-<!-- WORK -->
-<section class="work" id="work">
-  <div class="container">
-    <div class="work-header reveal">
-      <h2>Selected Work</h2>
-      <p>Real sites.<br>Real clients.<br>Click to visit.</p>
+  <section class="trust">
+    <div class="container">
+      <div class="trust-label">Trusted by</div>
+      <div class="trust-names">
+        <span class="trust-name">Daria Klymenko</span>
+        <span class="trust-name">Sarah Mitchell</span>
+        <span class="trust-name">James Thornton</span>
+        <span class="trust-name">Priya Kapoor</span>
+      </div>
     </div>
-    <div class="work-grid stagger">
-      <a href="https://dariaklymenko.netlify.app" target="_blank" rel="noopener" class="work-card">
-        <div class="work-card-inner">
-          <div class="work-card-client">Daria Klymenko</div>
-          <div class="work-card-meta">
-            <div class="work-card-tags">
-              <span class="work-card-tag">Web Design</span>
-              <span class="work-card-tag">Booking</span>
-              <span class="work-card-tag">Payments</span>
-              <span class="work-card-tag">Automation</span>
+  </section>
+
+  <section class="section section-dark work" id="work">
+    <div class="container">
+      <div class="work-header">
+        <div>
+          <div class="section-overline">Selected Work</div>
+          <h2>Real sites.<br>Real clients.</h2>
+        </div>
+        <p>Click to visit.<br>Each one built<br>end-to-end.</p>
+      </div>
+      <div class="work-grid">
+        <a href="https://dariaklymenko.netlify.app" target="_blank" rel="noopener" class="work-card">
+          <div class="work-card-inner">
+            <div class="work-card-client">Daria Klymenko</div>
+            <div class="work-card-meta">
+              <div class="work-card-tags">
+                <span class="work-card-tag">Web Design</span>
+                <span class="work-card-tag">Booking</span>
+                <span class="work-card-tag">Payments</span>
+                <span class="work-card-tag">Automation</span>
+              </div>
+              <span class="work-card-arrow">↗</span>
             </div>
-            <span class="work-card-arrow">↗</span>
           </div>
-        </div>
-      </a>
-      <div class="work-card">
-        <div class="work-card-inner">
-          <div class="work-card-client">Booking Template</div>
-          <div class="work-card-meta">
-            <div class="work-card-tags">
-              <span class="work-card-tag">Booking</span>
-              <span class="work-card-tag">Stripe</span>
-              <span class="work-card-tag">Automation</span>
+        </a>
+        <div class="work-card">
+          <div class="work-card-inner">
+            <div class="work-card-client">Booking Template</div>
+            <div class="work-card-meta">
+              <div class="work-card-tags">
+                <span class="work-card-tag">Booking</span>
+                <span class="work-card-tag">Stripe</span>
+                <span class="work-card-tag">Automation</span>
+              </div>
+              <span class="work-card-arrow">↗</span>
             </div>
-            <span class="work-card-arrow">↗</span>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ABOUT / PERSONALITY -->
-<section class="about" id="about">
-  <div class="container">
-    <div class="about-grid">
-      <div class="about-text reveal-left">
-        <h4>Hey, I'm Yeray</h4>
-        <h2 style="margin-top: 16px; margin-bottom: 32px;">I build the online side of your business so you don't have to.</h2>
-        <p>I'm a developer and automation specialist based in Spain. I work with service businesses — wellness practitioners, coaches, solo operators — who are great at what they do but hate the admin.</p>
-        <p>My job is to make the boring parts disappear. <strong>Booking, payments, follow-ups, reminders</strong> — all automated, all connected, all invisible.</p>
-        <p>I don't do generic. Every site I build feels intentional. Because your business isn't generic either.</p>
-      </div>
-      <div class="about-visual reveal-scale">
-        <div class="about-card">
-          <div class="about-card-label">By the numbers</div>
-          <div class="about-stat">
-            <div class="about-stat-value">80+</div>
-            <div class="about-stat-label">Projects delivered</div>
-          </div>
-          <div class="about-stat">
-            <div class="about-stat-value">5 days</div>
-            <div class="about-stat-label">Average delivery time</div>
-          </div>
-          <div class="about-stat">
-            <div class="about-stat-value">100%</div>
-            <div class="about-stat-label">Stripe-secured payments</div>
-          </div>
+  <section class="section section-light about" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-text">
+          <h4>Hey, I'm Yeray</h4>
+          <h2>I build the online side of your business so you don't have to.</h2>
+          <p>Developer and automation specialist based in Spain. I work with service businesses — wellness practitioners, coaches, solo operators — who are great at what they do but hate the admin.</p>
+          <p>My job is to make the boring parts disappear. <strong>Booking, payments, follow-ups, reminders</strong> — all automated, all connected, all invisible.</p>
+          <p>I don't do generic. Every site I build feels intentional. Because your business isn't generic either.</p>
+        </div>
+        <div class="about-stats">
+          <div class="about-stat"><div class="about-stat-value">80+</div><div class="about-stat-label">Projects delivered</div></div>
+          <div class="about-stat"><div class="about-stat-value">5 days</div><div class="about-stat-label">Average delivery time</div></div>
+          <div class="about-stat"><div class="about-stat-value">100%</div><div class="about-stat-label">Stripe-secured payments</div></div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- SERVICES -->
-<section class="services" id="services">
-  <div class="container">
-    <div class="services-header reveal">
-      <h4>What I Build</h4>
-      <h2>Everything your business needs to run itself online.</h2>
-    </div>
-    <div class="services-grid stagger">
-      <div class="service-card">
-        <div class="service-number">01</div>
-        <h3>Online Booking System</h3>
-        <p>Clients book themselves 24/7. Automated confirmations, reminders, calendar sync. No more phone tag.</p>
-        <div class="service-price">
-          <span class="amount">£250</span>
-          <span class="note">one-time</span>
+  <section class="section section-darker services" id="services">
+    <div class="container">
+      <div>
+        <div class="section-overline">What I Build</div>
+        <h2>Everything your business<br>needs to run itself online.</h2>
+        <p class="section-sub">No monthly fees. No subscriptions. Pay once, it's yours.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-number">01</div>
+          <h3>Online Booking System</h3>
+          <p>Clients book themselves 24/7. Automated confirmations, reminders, calendar sync. No more phone tag.</p>
+          <div class="service-price"><span class="amount">£250</span><span class="note">one-time</span></div>
+        </div>
+        <div class="service-card">
+          <div class="service-number">02</div>
+          <h3>Payment Automation</h3>
+          <p>Stripe setup with deposits, recurring payments, and automatic invoicing. Get paid before the appointment.</p>
+          <div class="service-price"><span class="amount">£150</span><span class="note">one-time</span></div>
+        </div>
+        <div class="service-card">
+          <div class="service-number">03</div>
+          <h3>Client Follow-Up AI</h3>
+          <p>Automated WhatsApp & email sequences. Rebooking reminders, review requests, birthday messages.</p>
+          <div class="service-price"><span class="amount">£200</span><span class="note">one-time</span></div>
+        </div>
+        <div class="service-card">
+          <div class="service-number">04</div>
+          <h3>Full Business Setup</h3>
+          <p>Website, booking, payments, follow-ups, administration automation. Everything connected. Delivered in 5 days.</p>
+          <div class="service-price"><span class="amount">£500</span><span class="note">one-time</span></div>
         </div>
       </div>
-      <div class="service-card">
-        <div class="service-number">02</div>
-        <h3>Payment Automation</h3>
-        <p>Stripe setup with deposits, recurring payments, and automatic invoicing. Get paid before the appointment.</p>
-        <div class="service-price">
-          <span class="amount">£150</span>
-          <span class="note">one-time</span>
-        </div>
-      </div>
-      <div class="service-card">
-        <div class="service-number">03</div>
-        <h3>Client Follow-Up AI</h3>
-        <p>Automated WhatsApp & email sequences. Rebooking reminders, review requests, birthday messages.</p>
-        <div class="service-price">
-          <span class="amount">£200</span>
-          <span class="note">one-time</span>
-      </div>
-      </div>
-      <div class="service-card">
-        <div class="service-number">04</div>
-        <h3>Full Business Setup</h3>
-        <p>Website, booking, payments, follow-ups, administration automation. Everything connected. Delivered in 5 days.</p>
-        <div class="service-price">
-          <span class="amount">£500</span>
-          <span class="note">one-time</span>
-        </div>
-      </div>
+      <div class="services-footer"><p>Or <strong>€100/month</strong> ongoing support — updates, tweaks, priority help. Cancel anytime.</p></div>
     </div>
-    <div class="services-footer reveal">
-      <p>Or <strong>€100/month</strong> ongoing support — updates, tweaks, priority help. Cancel anytime.</p>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- PROCESS -->
-<section class="process" id="process">
-  <div class="container">
-    <div class="process-header reveal">
-      <h4>How It Works</h4>
-      <h2>Pay first. Then I build. No surprises.</h2>
-    </div>
-    <div class="process-timeline stagger">
-      <div class="process-step">
-        <div class="process-number">01</div>
-        <div>
-          <h3>You pay via Stripe</h3>
-          <p>Secure payment, instant confirmation. You get a receipt. I get notified.</p>
-        </div>
+  <section class="section section-light process" id="process">
+    <div class="container">
+      <div>
+        <div class="section-overline">How It Works</div>
+        <h2>Pay first.<br>Then I build.<br>No surprises.</h2>
       </div>
-      <div class="process-step">
-        <div class="process-number">02</div>
-        <div>
-          <h3>You tell me what you need</h3>
-          <p>Quick form about your business, what you paid for, and what's annoying you.</p>
-        </div>
-      </div>
-      <div class="process-step">
-        <div class="process-number">03</div>
-        <div>
-          <h3>I build and deliver</h3>
-          <p>Most projects done in 3-5 days. You get updates along the way. I don't disappear.</p>
-        </div>
-      </div>
-      <div class="process-step">
-        <div class="process-number">04</div>
-        <div>
-          <h3>I check in after</h3>
-          <p>A week after delivery I make sure everything's running. If something's off, I fix it.</p>
-        </div>
-      </div>
-      <div class="process-step">
-        <div class="process-number">05</div>
-        <div>
-          <h3>We find what else you need</h3>
-          <p>Once basics are running, I spot what else could save you time — workflows, marketing, automation.</p>
-        </div>
-      </div>
-      <div class="process-step">
-        <div class="process-number">06</div>
-        <div>
-          <h3>You run your business</h3>
-          <p>The boring online stuff? Handled. You focus on the work you actually love.</p>
-        </div>
+      <div class="process-timeline">
+        <div class="process-step"><div class="process-number">01</div><div><h3>You pay via Stripe</h3><p>Secure payment, instant confirmation. You get a receipt. I get notified.</p></div></div>
+        <div class="process-step"><div class="process-number">02</div><div><h3>You tell me what you need</h3><p>Quick form about your business, what you paid for, and what's annoying you.</p></div></div>
+        <div class="process-step"><div class="process-number">03</div><div><h3>I build and deliver</h3><p>Most projects done in 3-5 days. You get updates along the way. I don't disappear.</p></div></div>
+        <div class="process-step"><div class="process-number">04</div><div><h3>I check in after</h3><p>A week after delivery I make sure everything's running. If something's off, I fix it.</p></div></div>
+        <div class="process-step"><div class="process-number">05</div><div><h3>We find what else you need</h3><p>Once basics are running, I spot what else could save you time — workflows, marketing, automation.</p></div></div>
+        <div class="process-step"><div class="process-number">06</div><div><h3>You run your business</h3><p>The boring online stuff? Handled. You focus on the work you actually love.</p></div></div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- WOW MOMENT -->
-<section class="wow" id="wow">
-  <div class="container">
-    <div class="wow-content reveal">
-      <h4>The Proof</h4>
-      <h2>This site was built with the same process.<br>Click below to see it in action.</h2>
-      <p>Every cinematic detail — the scroll reveals, the typography, the motion — is built with AI-assisted automation. This is what your site could feel like.</p>
-    </div>
-    <div class="wow-stage reveal-scale" id="wowStage">
-      <div class="wow-filmstrip">
-        <div class="wow-line" id="line1">Your business</div>
-        <div class="wow-line" id="line2">deserves a website</div>
-        <div class="wow-line accent" id="line3">that feels like this.</div>
+  <section class="section section-dark wow" id="wow">
+    <div class="container">
+      <div class="wow-content">
+        <div class="section-overline">The Proof</div>
+        <h2>This site was built with the same process.<br>Click to see it in action.</h2>
+        <p class="section-sub" style="margin:16px auto 0;">Every cinematic detail — the scroll reveals, the typography, the motion — is built with AI-assisted automation.</p>
       </div>
-      <div class="wow-hint" id="wowHint">Click to play</div>
+      <div class="wow-stage reveal-s" id="wowStage">
+        <div class="wow-filmstrip">
+          <div class="wow-line" id="line1">Your business</div>
+          <div class="wow-line" id="line2">deserves a website</div>
+          <div class="wow-line accent" id="line3">that feels like this.</div>
+        </div>
+        <div class="wow-hint" id="wowHint">Click to play</div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- TESTIMONIALS -->
-<section class="testimonials">
-  <div class="container">
-    <div class="testimonials-header reveal">
-      <h4>What Clients Say</h4>
-    </div>
-    <div class="testimonial-grid stagger">
-      <div class="testimonial-card">
-        <div class="testimonial-quote">"Yeray built my entire online presence in days, not weeks. The booking system alone saved me 10 hours a week."</div>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">DK</div>
-          <div>
-            <div class="testimonial-name">Daria Klymenko</div>
-            <div class="testimonial-role">Wellness Practitioner</div>
-          </div>
-        </div>
+  <section class="section section-darker faq">
+    <div class="container">
+      <div style="text-align:center;">
+        <div class="section-overline" style="justify-content:center;">Questions</div>
+        <h2>Things you might want to know.</h2>
       </div>
-      <div class="testimonial-card">
-        <div class="testimonial-quote">"I stopped chasing payments. The automation handles deposits, reminders, and follow-ups. It just works."</div>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">SM</div>
-          <div>
-            <div class="testimonial-name">Sarah Mitchell</div>
-            <div class="testimonial-role">Service Business Owner</div>
-          </div>
-        </div>
+      <div class="faq-list">
+        <div class="faq-item"><button class="faq-q">How long does it take?<span class="icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Most projects are delivered in 3-5 days after payment. Full business setups take up to 5 days. You'll get updates throughout.</div></div></div>
+        <div class="faq-item"><button class="faq-q">What if I'm not happy?<span class="icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Stripe handles the payment, so you're protected. If something's not right, tell me within a week and I'll fix it. That's included.</div></div></div>
+        <div class="faq-item"><button class="faq-q">Do I need technical knowledge?<span class="icon">+</span></button><div class="faq-a"><div class="faq-a-inner">None. You tell me what you need in plain language. I handle everything technical — setup, configuration, automation, the lot.</div></div></div>
+        <div class="faq-item"><button class="faq-q">Can I add services later?<span class="icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Yes. Start with one service, add more whenever you want. Everything connects — booking, payments, follow-up all work together.</div></div></div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- FAQ -->
-<section class="faq">
-  <div class="container">
-    <div class="faq-header reveal">
-      <h4>Questions</h4>
-      <h2>Things you might want to know.</h2>
+  <section class="section section-dark cta" id="contact">
+    <div class="container">
+      <div class="section-overline" style="justify-content:center;">Start Here</div>
+      <h2>Stop doing administration.<br>Start doing your work.</h2>
+      <p class="section-sub" style="margin:0 auto 48px;text-align:center;">Secure Stripe payment. Delivered in days. No monthly fees unless you want support.</p>
+      <div class="cta-actions">
+        <a href="https://buy.stripe.com/4gM4gBgm73lOgOectcfIs01" target="_blank" rel="noopener" class="btn btn-primary">Get Started — Pay Securely <span>→</span></a>
+        <a href="https://wa.me/34675394969" target="_blank" rel="noopener" class="btn btn-wa">WhatsApp Me</a>
+      </div>
     </div>
-    <div class="faq-list">
-      <div class="faq-item">
-        <button class="faq-question">
-          How long does it take?
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-answer">
-          <p>Most projects are delivered in 3-5 days after payment. Full business setups take up to 5 days. You'll get updates throughout.</p>
-        </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question">
-          What if I'm not happy?
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-answer">
-          <p>Stripe handles the payment, so you're protected. If something's not right, tell me within a week and I'll fix it. That's included.</p>
-        </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question">
-          Do I need technical knowledge?
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-answer">
-          <p>None. You tell me what you need in plain language. I handle everything technical — setup, configuration, automation, the lot.</p>
-        </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question">
-          Can I add services later?
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-answer">
-          <p>Yes. Start with one service, add more whenever you want. Everything connects — booking, payments, follow-up all work together.</p>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-copy">© 2026 Yeray Val Real</div>
+        <div class="footer-links">
+          <a href="mailto:yerayvalreal@gmail.com">Email</a>
+          <a href="https://wa.me/34675394969" target="_blank" rel="noopener">WhatsApp</a>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </footer>
 
-<!-- CTA -->
-<section class="cta" id="contact">
-  <div class="container">
-    <h2 class="reveal">Stop doing administration.<br>Start doing your work.</h2>
-    <p class="reveal">Secure Stripe payment. Delivered in days. No monthly fees unless you want support.</p>
-    <div class="cta-buttons reveal">
-      <a href="https://buy.stripe.com/4gM4gBgm73lOgOoctcfIs01" target="_blank" rel="noopener" class="btn-primary">
-        Get Started — Pay Securely
-        <span>→</span>
-      </a>
-      <a href="https://wa.me/34675394969" target="_blank" rel="noopener" class="btn-secondary">
-        Or message me on WhatsApp
-      </a>
-    </div>
-  </div>
-</section>
+  <script>
+    const nav = document.getElementById('mainNav');
+    new IntersectionObserver(([e]) => nav.classList.toggle('scrolled', !e.isIntersecting), { threshold: 0 }).observe(document.querySelector('.hero'));
 
-<!-- FOOTER -->
-<footer>
-  <div class="container">
-    <div class="footer-inner">
-      <div class="footer-copy">© 2026 Yeray Val Real</div>
-      <div class="footer-links">
-        <a href="mailto:yerayvalreal@gmail.com">Email</a>
-        <a href="https://wa.me/34675394969" target="_blank" rel="noopener">WhatsApp</a>
-      </div>
-    </div>
-  </div>
-</footer>
+    const scrollObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); scrollObs.unobserve(e.target); } });
+    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.reveal, .reveal-l, .reveal-r, .reveal-s').forEach(el => scrollObs.observe(el));
 
-<script>
-// ===== SCROLL REVEAL — Varied animations =====
-const revealEls = document.querySelectorAll('.reveal');
-const revealLeftEls = document.querySelectorAll('.reveal-left');
-const revealScaleEls = document.querySelectorAll('.reveal-scale');
-const staggerEls = document.querySelectorAll('.stagger');
-const processSteps = document.querySelectorAll('.process-step');
+    const pt = document.querySelector('.process-timeline');
+    if (pt) new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.querySelectorAll('.process-step').forEach((s, i) => setTimeout(() => s.classList.add('visible'), i * 120)); } });
+    }, { threshold: 0.15 }).observe(pt);
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
-
-revealEls.forEach(el => observer.observe(el));
-revealLeftEls.forEach(el => observer.observe(el));
-revealScaleEls.forEach(el => observer.observe(el));
-staggerEls.forEach(el => observer.observe(el));
-
-// Process steps — slide in from left with stagger
-const processObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const steps = entry.target.querySelectorAll('.process-step');
-      steps.forEach((step, i) => {
-        setTimeout(() => step.classList.add('visible'), i * 150);
+    document.querySelectorAll('.faq-q').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item'), ans = item.querySelector('.faq-a'), open = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(o => { o.classList.remove('open'); o.querySelector('.faq-a').style.maxHeight = '0'; });
+        if (!open) { item.classList.add('open'); ans.style.maxHeight = ans.scrollHeight + 'px'; }
       });
-      processObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.2 });
+    });
 
-document.querySelectorAll('.process-timeline').forEach(tl => processObserver.observe(tl));
-
-// ===== FAQ =====
-document.querySelectorAll('.faq-question').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const item = btn.parentElement;
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-    if (!isOpen) item.classList.add('open');
-  });
-});
-
-// ===== WOW MOMENT =====
-const wowStage = document.getElementById('wowStage');
-const wowHint = document.getElementById('wowHint');
-const lines = [
-  document.getElementById('line1'),
-  document.getElementById('line2'),
-  document.getElementById('line3')
-];
-let wowPlaying = false;
-
-wowStage.addEventListener('click', () => {
-  if (wowPlaying) return;
-  wowPlaying = true;
-  wowStage.classList.add('playing');
-
-  const delays = [0, 900, 2000];
-  const holdTime = 2800;
-
-  lines.forEach((line, i) => {
-    setTimeout(() => line.classList.add('visible'), delays[i]);
-  });
-
-  setTimeout(() => {
-    lines.forEach(line => line.classList.remove('visible'));
-    setTimeout(() => {
-      wowPlaying = false;
-      wowStage.classList.remove('playing');
-    }, 800);
-  }, delays[2] + holdTime);
-});
-
-// ===== SMOOTH SCROLL =====
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function(e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
-});
-
-// ===== NAV SCROLL =====
-const nav = document.getElementById('mainNav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 80);
-}, { passive: true });
-</script>
-
+    const ws = document.getElementById('wowStage'), wh = document.getElementById('wowHint');
+    const wl = [document.getElementById('line1'), document.getElementById('line2'), document.getElementById('line3')];
+    let wp = false;
+    ws.addEventListener('click', () => {
+      if (wp) return; wp = true; ws.classList.add('playing');
+      wl.forEach((l, i) => setTimeout(() => l.classList.add('visible'), 200 + i * 600));
+      setTimeout(() => { wl.forEach(l => l.classList.remove('visible')); ws.classList.remove('playing'); wp = false; }, 3200);
+    });
+  </script>
 </body>
 </html>
